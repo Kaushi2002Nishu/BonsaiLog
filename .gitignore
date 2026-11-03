@@ -1,0 +1,38 @@
+# Node modules
+node_modules/
+
+# Expo
+.expo/
+dist/
+web-build/
+
+# Native builds
+ios/
+android/
+
+# Metro bundler cache
+.metro-cache/
+metro-bundler-hot-update-*
+
+# Temporary files
+*.log
+*.lock
+.lock
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
