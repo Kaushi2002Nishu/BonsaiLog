@@ -1,66 +1,3 @@
-/*import React, { useState } from 'react';
-import { View, Text, TextInput, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
-import bonsaiData from '../data/bonsaiData.json';
-
-export default function DirectoryScreen({ navigation }) {
-  const [search, setSearch] = useState('');
-  const [filterType, setFilterType] = useState('All');
-
-  const filteredData = bonsaiData.species.filter(item => {
-    const matchesSearch = item.name.toLowerCase().includes(search.toLowerCase());
-    const matchesType = filterType === 'All' || item.type === filterType;
-    return matchesSearch && matchesType;
-  });
-
-  return (
-    <View style={styles.container}>
-      <TextInput 
-        style={styles.searchInput}
-        placeholder="Search Bonsai Species..."
-        value={search}
-        onChangeText={setSearch}
-      />
-      <View style={styles.filterRow}>
-        {['All', 'Indoor', 'Outdoor'].map(type => (
-          <TouchableOpacity 
-            key={type} 
-            onPress={() => setFilterType(type)}
-            style={[styles.filterBtn, filterType === type && styles.activeBtn]}
-          >
-            <Text style={styles.btnText}>{type}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-      <FlatList
-        data={filteredData}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => (
-          <TouchableOpacity 
-            style={styles.card} 
-            onPress={() => navigation.navigate('ProfileDetail', { tree: item })}
-          >
-            <Text style={styles.title}>{item.name}</Text>
-            <Text>Type: {item.type} | Difficulty: {item.difficulty}</Text>
-          </TouchableOpacity>
-        )}
-      />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16, backgroundColor: '#fff' },
-  searchInput: { borderWidth: 1, borderColor: '#ccc', padding: 10, borderRadius: 8, marginBottom: 10 },
-  filterRow: { flexDirection: 'row', justifyContent: 'space-around', marginBottom: 10 },
-  filterBtn: { padding: 8, borderBottomWidth: 2, borderBottomColor: 'transparent' },
-  activeBtn: { borderBottomColor: 'green' },
-  btnText: { fontWeight: 'bold' },
-  card: { padding: 16, backgroundColor: '#f9f9f9', borderRadius: 8, marginBottom: 10 },
-  title: { fontSize: 16, fontWeight: 'bold' }
-});*/
-
-
-
 import React, { useState } from 'react';
 import { View, Text, TextInput, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import bonsaiData from '../data/bonsai.json';
@@ -77,46 +14,72 @@ export default function DirectoryScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {/* Navigation Shortcut Buttons */}
+      {/* Top Header Banner */}
+      <View style={styles.headerBanner}>
+        <View>
+          <Text style={styles.bannerTitle}>🌿 BonsaiLog Studio</Text>
+          <Text style={styles.bannerSub}>Manage & explore your bonsai collection</Text>
+        </View>
+      </View>
+
+      {/* Navigation Shortcut Cards */}
       <View style={styles.navRow}>
-        <TouchableOpacity style={styles.navBtn} onPress={() => navigation.navigate('Collection')}>
-          <Text style={styles.navBtnText}>My Collection</Text>
+        <TouchableOpacity style={[styles.navBtn, styles.navPrimary]} onPress={() => navigation.navigate('Collection')}>
+          <Text style={styles.navBtnTextPrimary}>🌿 My Collection</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navBtn} onPress={() => navigation.navigate('Schedule')}>
-          <Text style={styles.navBtnText}>Care Logs</Text>
+          <Text style={styles.navBtnText}>📅 Care Logs</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navBtn} onPress={() => navigation.navigate('StylingGuide')}>
-          <Text style={styles.navBtnText}>Styling Guide</Text>
+          <Text style={styles.navBtnText}>📖 Guides</Text>
         </TouchableOpacity>
       </View>
 
+      <Text style={styles.sectionHeading}>Bonsai Species Directory</Text>
+
+      {/* Search Bar */}
       <TextInput 
         style={styles.searchInput}
-        placeholder="Search Bonsai Species..."
+        placeholder="🔍 Search bonsai species by name..."
+        placeholderTextColor="#95a5a6"
         value={search}
         onChangeText={setSearch}
       />
+
+      {/* Filter Tabs */}
       <View style={styles.filterRow}>
         {['All', 'Indoor', 'Outdoor'].map(type => (
           <TouchableOpacity 
             key={type} 
             onPress={() => setFilterType(type)}
-            style={[styles.filterBtn, filterType === type && styles.activeBtn]}
+            style={[styles.filterBtn, filterType === type && styles.activeFilterBtn]}
           >
-            <Text style={styles.btnText}>{type}</Text>
+            <Text style={[styles.filterText, filterType === type && styles.activeFilterText]}>{type}</Text>
           </TouchableOpacity>
         ))}
       </View>
+
+      {/* Species List */}
       <FlatList
         data={filteredData}
         keyExtractor={item => item.id}
+        showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
           <TouchableOpacity 
             style={styles.card} 
             onPress={() => navigation.navigate('ProfileDetail', { tree: item })}
           >
-            <Text style={styles.title}>{item.name}</Text>
-            <Text>Type: {item.type} | Difficulty: {item.difficulty}</Text>
+            <View style={styles.cardContent}>
+              <Text style={styles.title}>🌳 {item.name}</Text>
+              <Text style={styles.descSnippet} numberOfLines={1}>{item.description}</Text>
+              <View style={styles.badgeRow}>
+                <Text style={styles.badge}>Type: {item.type}</Text>
+                <Text style={[styles.badge, styles.diffBadge]}>Difficulty: {item.difficulty}</Text>
+              </View>
+            </View>
+            <View style={styles.arrowContainer}>
+              <Text style={styles.arrow}>➔</Text>
+            </View>
           </TouchableOpacity>
         )}
       />
@@ -125,15 +88,29 @@ export default function DirectoryScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16, backgroundColor: '#fff' },
-  navRow: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 12 },
-  navBtn: { backgroundColor: '#eef6fc', padding: 8, borderRadius: 6, borderWidth: 1, borderColor: '#2980b9' },
-  navBtnText: { fontSize: 12, fontWeight: 'bold', color: '#2980b9' },
-  searchInput: { borderWidth: 1, borderColor: '#ccc', padding: 10, borderRadius: 8, marginBottom: 10 },
-  filterRow: { flexDirection: 'row', justifyContent: 'space-around', marginBottom: 10 },
-  filterBtn: { padding: 8, borderBottomWidth: 2, borderBottomColor: 'transparent' },
-  activeBtn: { borderBottomColor: 'green' },
-  btnText: { fontWeight: 'bold' },
-  card: { padding: 16, backgroundColor: '#f9f9f9', borderRadius: 8, marginBottom: 10 },
-  title: { fontSize: 16, fontWeight: 'bold' }
+  container: { flex: 1, padding: 20, backgroundColor: '#f4f6f5' },
+  headerBanner: { backgroundColor: '#1b4d3e', padding: 18, borderRadius: 12, marginBottom: 15, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.1, shadowRadius: 4, elevation: 3 },
+  bannerTitle: { fontSize: 22, fontWeight: 'bold', color: '#ffffff' },
+  bannerSub: { fontSize: 13, color: '#a3c1ad', marginTop: 3 },
+  navRow: { flexDirection: 'row', gap: 10, marginBottom: 20 },
+  navBtn: { flex: 1, backgroundColor: '#ffffff', paddingVertical: 12, paddingHorizontal: 10, borderRadius: 10, alignItems: 'center', borderWidth: 1, borderColor: '#dcd7c9', shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.05, shadowRadius: 2, elevation: 1 },
+  navPrimary: { backgroundColor: '#2e6f40', borderColor: '#2e6f40' },
+  navBtnText: { fontSize: 13, fontWeight: 'bold', color: '#3a3532' },
+  navBtnTextPrimary: { fontSize: 13, fontWeight: 'bold', color: '#ffffff' },
+  sectionHeading: { fontSize: 16, fontWeight: 'bold', color: '#3a3532', marginBottom: 10 },
+  searchInput: { borderWidth: 1, borderColor: '#dcd7c9', padding: 14, borderRadius: 10, marginBottom: 15, backgroundColor: '#ffffff', fontSize: 14, color: '#3a3532', shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.03, shadowRadius: 2 },
+  filterRow: { flexDirection: 'row', backgroundColor: '#e3dfd8', padding: 4, borderRadius: 10, marginBottom: 15 },
+  filterBtn: { flex: 1, paddingVertical: 8, alignItems: 'center', borderRadius: 8 },
+  activeFilterBtn: { backgroundColor: '#795548', shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.1, shadowRadius: 2, elevation: 1 },
+  filterText: { fontWeight: '600', color: '#605852', fontSize: 13 },
+  activeFilterText: { color: '#ffffff' },
+  card: { flexDirection: 'row', alignItems: 'center', padding: 16, backgroundColor: '#ffffff', borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#dcd7c9', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.05, shadowRadius: 4, elevation: 2 },
+  cardContent: { flex: 1 },
+  title: { fontSize: 16, fontWeight: 'bold', color: '#2e6f40', marginBottom: 4 },
+  descSnippet: { fontSize: 13, color: '#605852', marginBottom: 8 },
+  badgeRow: { flexDirection: 'row', gap: 8 },
+  badge: { fontSize: 11, backgroundColor: '#f4f1ea', paddingHorizontal: 8, paddingVertical: 3, borderRadius: 6, color: '#3a3532', overflow: 'hidden', fontWeight: '500', borderWidth: 1, borderColor: '#dcd7c9' },
+  diffBadge: { backgroundColor: '#fbeee6', color: '#795548', borderColor: '#e8daef' },
+  arrowContainer: { paddingLeft: 10 },
+  arrow: { fontSize: 16, color: '#795548', fontWeight: 'bold' }
 });

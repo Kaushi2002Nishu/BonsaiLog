@@ -7,13 +7,14 @@ export default function StylingGuideScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.headerTitle}>Traditional Bonsai Styling Guide</Text>
+      <Text style={styles.screenTitle}>Traditional Bonsai Styling Guides</Text>
       <FlatList
         data={guides}
         keyExtractor={item => item.id}
+        showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
           <View style={styles.card}>
-            <Text style={styles.styleTitle}>{item.style}</Text>
+            <Text style={styles.styleTitle}>✨ {item.style}</Text>
             <Text style={styles.description}>{item.description}</Text>
           </View>
         )}
@@ -23,9 +24,9 @@ export default function StylingGuideScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16, backgroundColor: '#fff' },
-  headerTitle: { fontSize: 20, fontWeight: 'bold', marginBottom: 15, color: '#2c3e50' },
-  card: { padding: 16, backgroundColor: '#f4f6f7', borderRadius: 8, marginBottom: 12, borderWidth: 1, borderColor: '#d5dbdb' },
-  styleTitle: { fontSize: 18, fontWeight: 'bold', color: '#117864', marginBottom: 5 },
-  description: { fontSize: 14, color: '#34495e', lineHeight: 20 }
+  container: { flex: 1, padding: 16, backgroundColor: '#f4f6f7' },
+  screenTitle: { fontSize: 18, fontWeight: 'bold', color: '#2c3e50', marginBottom: 15 },
+  card: { padding: 16, backgroundColor: '#fff', borderRadius: 12, marginBottom: 12, elevation: 2, borderWidth: 1, borderColor: '#eaeded' },
+  styleTitle: { fontSize: 17, fontWeight: 'bold', color: '#117864', marginBottom: 8 },
+  description: { fontSize: 14, color: '#566573', lineHeight: 22 }
 });
