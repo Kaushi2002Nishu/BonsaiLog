@@ -62,14 +62,14 @@ export default function ScheduleScreen() {
         <TextInput 
           style={styles.input} 
           placeholder="Task (e.g., Pruned branches, Watered)" 
-          placeholderTextColor="#888"
+          placeholderTextColor="#8c8275"
           value={task} 
           onChangeText={setTask} 
         />
         <TextInput 
           style={styles.input} 
           placeholder="Date (YYYY-MM-DD)" 
-          placeholderTextColor="#888"
+          placeholderTextColor="#8c8275"
           value={date} 
           onChangeText={setDate} 
         />
@@ -81,17 +81,18 @@ export default function ScheduleScreen() {
 
       {logs.length === 0 ? (
         <View style={styles.emptyContainer}>
-          <Text style={styles.emptyText}>No care logs recorded yet. Track your watering and pruning above!</Text>
+          <Text style={styles.emptyText}>No care logs recorded yet. Start tracking your maintenance tasks above!</Text>
         </View>
       ) : (
         <FlatList
           data={logs}
           keyExtractor={item => item.id}
+          showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
             <View style={styles.logCard}>
               <View style={{ flex: 1 }}>
-                <Text style={styles.taskText}>✂️ {item.task}</Text>
-                <Text style={styles.dateText}>📅 {item.date}</Text>
+                <Text style={styles.taskText}>💧 {item.task}</Text>
+                <Text style={styles.dateText}>📅 Date: {item.date}</Text>
               </View>
               <TouchableOpacity style={styles.deleteBtn} onPress={() => deleteLog(item.id)}>
                 <Text style={styles.deleteBtnText}>Delete</Text>
@@ -105,17 +106,17 @@ export default function ScheduleScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16, backgroundColor: '#f4f6f7' },
-  headerTitle: { fontSize: 22, fontWeight: 'bold', marginBottom: 15, color: '#1b4f72' },
-  formContainer: { backgroundColor: '#fff', padding: 12, borderRadius: 10, marginBottom: 15, elevation: 2 },
-  input: { borderWidth: 1, borderColor: '#d5dbdb', padding: 10, borderRadius: 8, marginBottom: 10, backgroundColor: '#fafafa' },
-  addButton: { backgroundColor: '#2980b9', padding: 12, borderRadius: 8, alignItems: 'center' },
-  addButtonText: { color: '#fff', fontWeight: 'bold', fontSize: 15 },
-  logCard: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 15, backgroundColor: '#fff', borderRadius: 10, marginBottom: 10, elevation: 2, borderWidth: 1, borderColor: '#d4e6f1' },
-  taskText: { fontSize: 16, fontWeight: 'bold', color: '#1b4f72' },
-  dateText: { fontSize: 13, color: '#566573', marginTop: 4 },
-  deleteBtn: { backgroundColor: '#e74c3c', paddingVertical: 6, paddingHorizontal: 12, borderRadius: 6 },
-  deleteBtnText: { color: '#fff', fontWeight: 'bold', fontSize: 12 },
+  container: { flex: 1, padding: 20, backgroundColor: '#F7F4EF' }, // Soft Cream Background
+  headerTitle: { fontSize: 22, fontWeight: 'bold', marginBottom: 15, color: '#2C5E43' },
+  formContainer: { backgroundColor: '#FFFFFF', padding: 16, borderRadius: 12, marginBottom: 15, borderWidth: 1, borderColor: '#E3DCB9', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.05, shadowRadius: 4, elevation: 2 },
+  input: { borderWidth: 1, borderColor: '#E3DCB9', padding: 12, borderRadius: 10, marginBottom: 12, backgroundColor: '#FAF8F5', color: '#4A3B32' },
+  addButton: { backgroundColor: '#3B7A57', padding: 14, borderRadius: 10, alignItems: 'center', shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.1, shadowRadius: 2, elevation: 2 },
+  addButtonText: { color: '#FFFFFF', fontWeight: 'bold', fontSize: 15 },
+  logCard: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 16, backgroundColor: '#FFFFFF', borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#E3DCB9', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.05, shadowRadius: 4, elevation: 2 },
+  taskText: { fontSize: 16, fontWeight: 'bold', color: '#2C5E43' },
+  dateText: { fontSize: 13, color: '#7A6B5D', marginTop: 4 },
+  deleteBtn: { backgroundColor: '#8C6239', paddingVertical: 8, paddingHorizontal: 14, borderRadius: 8 },
+  deleteBtnText: { color: '#FFFFFF', fontWeight: 'bold', fontSize: 12 },
   emptyContainer: { alignItems: 'center', marginTop: 40 },
-  emptyText: { textAlign: 'center', color: '#95a5a6', fontSize: 15 }
+  emptyText: { textAlign: 'center', color: '#8c8275', fontSize: 15 }
 });

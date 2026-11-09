@@ -14,8 +14,11 @@ export default function DirectoryScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {/* Top Header Banner */}
+      {/* Top Header Banner with Light Green & Brown Watermark Vibe */}
       <View style={styles.headerBanner}>
+        <View style={styles.watermarkContainer}>
+          <Text style={styles.watermarkText}>🍃 🌿 🍂</Text>
+        </View>
         <View>
           <Text style={styles.bannerTitle}>🌿 BonsaiLog Studio</Text>
           <Text style={styles.bannerSub}>Manage & explore your bonsai collection</Text>
@@ -41,7 +44,7 @@ export default function DirectoryScreen({ navigation }) {
       <TextInput 
         style={styles.searchInput}
         placeholder="🔍 Search bonsai species by name..."
-        placeholderTextColor="#95a5a6"
+        placeholderTextColor="#8c8275"
         value={search}
         onChangeText={setSearch}
       />
@@ -88,29 +91,45 @@ export default function DirectoryScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: '#f4f6f5' },
-  headerBanner: { backgroundColor: '#1b4d3e', padding: 18, borderRadius: 12, marginBottom: 15, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.1, shadowRadius: 4, elevation: 3 },
-  bannerTitle: { fontSize: 22, fontWeight: 'bold', color: '#ffffff' },
-  bannerSub: { fontSize: 13, color: '#a3c1ad', marginTop: 3 },
+  container: { flex: 1, padding: 20, backgroundColor: '#F7F4EF' }, // Soft Cream Background
+  headerBanner: { 
+    backgroundColor: '#D8E2DC', // Soft Light Green Background
+    padding: 18, 
+    borderRadius: 12, 
+    marginBottom: 15, 
+    borderWidth: 1, 
+    borderColor: '#C2D1C9',
+    overflow: 'hidden',
+    position: 'relative',
+    shadowColor: '#000', 
+    shadowOffset: { width: 0, height: 2 }, 
+    shadowOpacity: 0.05, 
+    shadowRadius: 4, 
+    elevation: 2 
+  },
+  watermarkContainer: { position: 'absolute', right: 15, top: 5, opacity: 0.35 },
+  watermarkText: { fontSize: 45, color: '#8C6239' }, // Brown watermark leaves/icons
+  bannerTitle: { fontSize: 22, fontWeight: 'bold', color: '#2C5E43' },
+  bannerSub: { fontSize: 13, color: '#5A7363', marginTop: 3 },
   navRow: { flexDirection: 'row', gap: 10, marginBottom: 20 },
-  navBtn: { flex: 1, backgroundColor: '#ffffff', paddingVertical: 12, paddingHorizontal: 10, borderRadius: 10, alignItems: 'center', borderWidth: 1, borderColor: '#dcd7c9', shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.05, shadowRadius: 2, elevation: 1 },
-  navPrimary: { backgroundColor: '#2e6f40', borderColor: '#2e6f40' },
-  navBtnText: { fontSize: 13, fontWeight: 'bold', color: '#3a3532' },
-  navBtnTextPrimary: { fontSize: 13, fontWeight: 'bold', color: '#ffffff' },
-  sectionHeading: { fontSize: 16, fontWeight: 'bold', color: '#3a3532', marginBottom: 10 },
-  searchInput: { borderWidth: 1, borderColor: '#dcd7c9', padding: 14, borderRadius: 10, marginBottom: 15, backgroundColor: '#ffffff', fontSize: 14, color: '#3a3532', shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.03, shadowRadius: 2 },
-  filterRow: { flexDirection: 'row', backgroundColor: '#e3dfd8', padding: 4, borderRadius: 10, marginBottom: 15 },
+  navBtn: { flex: 1, backgroundColor: '#FFFFFF', paddingVertical: 12, paddingHorizontal: 10, borderRadius: 10, alignItems: 'center', borderWidth: 1, borderColor: '#E3DCB9', shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.05, shadowRadius: 2, elevation: 1 },
+  navPrimary: { backgroundColor: '#3B7A57', borderColor: '#3B7A57' },
+  navBtnText: { fontSize: 13, fontWeight: 'bold', color: '#4A3B32' },
+  navBtnTextPrimary: { fontSize: 13, fontWeight: 'bold', color: '#FFFFFF' },
+  sectionHeading: { fontSize: 16, fontWeight: 'bold', color: '#4A3B32', marginBottom: 10 },
+  searchInput: { borderWidth: 1, borderColor: '#E3DCB9', padding: 14, borderRadius: 10, marginBottom: 15, backgroundColor: '#FFFFFF', fontSize: 14, color: '#4A3B32', shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.03, shadowRadius: 2 },
+  filterRow: { flexDirection: 'row', backgroundColor: '#EBE5D8', padding: 4, borderRadius: 10, marginBottom: 15 },
   filterBtn: { flex: 1, paddingVertical: 8, alignItems: 'center', borderRadius: 8 },
-  activeFilterBtn: { backgroundColor: '#795548', shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.1, shadowRadius: 2, elevation: 1 },
-  filterText: { fontWeight: '600', color: '#605852', fontSize: 13 },
-  activeFilterText: { color: '#ffffff' },
-  card: { flexDirection: 'row', alignItems: 'center', padding: 16, backgroundColor: '#ffffff', borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#dcd7c9', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.05, shadowRadius: 4, elevation: 2 },
+  activeFilterBtn: { backgroundColor: '#8C6239', shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.1, shadowRadius: 2, elevation: 1 },
+  filterText: { fontWeight: '600', color: '#7A6B5D', fontSize: 13 },
+  activeFilterText: { color: '#FFFFFF' },
+  card: { flexDirection: 'row', alignItems: 'center', padding: 16, backgroundColor: '#FFFFFF', borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#E3DCB9', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.05, shadowRadius: 4, elevation: 2 },
   cardContent: { flex: 1 },
-  title: { fontSize: 16, fontWeight: 'bold', color: '#2e6f40', marginBottom: 4 },
-  descSnippet: { fontSize: 13, color: '#605852', marginBottom: 8 },
+  title: { fontSize: 16, fontWeight: 'bold', color: '#2C5E43', marginBottom: 4 },
+  descSnippet: { fontSize: 13, color: '#7A6B5D', marginBottom: 8 },
   badgeRow: { flexDirection: 'row', gap: 8 },
-  badge: { fontSize: 11, backgroundColor: '#f4f1ea', paddingHorizontal: 8, paddingVertical: 3, borderRadius: 6, color: '#3a3532', overflow: 'hidden', fontWeight: '500', borderWidth: 1, borderColor: '#dcd7c9' },
-  diffBadge: { backgroundColor: '#fbeee6', color: '#795548', borderColor: '#e8daef' },
+  badge: { fontSize: 11, backgroundColor: '#F4EFEA', paddingHorizontal: 8, paddingVertical: 3, borderRadius: 6, color: '#4A3B32', overflow: 'hidden', fontWeight: '500', borderWidth: 1, borderColor: '#E3DCB9' },
+  diffBadge: { backgroundColor: '#FAF0E6', color: '#8C6239', borderColor: '#E8D4C0' },
   arrowContainer: { paddingLeft: 10 },
-  arrow: { fontSize: 16, color: '#795548', fontWeight: 'bold' }
+  arrow: { fontSize: 16, color: '#8C6239', fontWeight: 'bold' }
 });

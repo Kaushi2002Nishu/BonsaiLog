@@ -5,19 +5,13 @@
       "name": "Ficus Retusa (Banyan Bonsai)",
       "type": "Indoor",
       "difficulty": "Beginner",
-      "pruningTime": "Spring and Summer",
-      "soilMix": "60% Akadama, 40% Pumice",
-      "wiringGuide": "Wire young branches in spring. Be careful as wood is soft.",
-      "description": "Very forgiving indoor bonsai ideal for beginners."
+      "description": "Very forgiving indoor bonsai ideal for beginners with aerial roots."
     },
     {
       "id": "2",
       "name": "Japanese Black Pine",
       "type": "Outdoor",
       "difficulty": "Advanced",
-      "pruningTime": "Early Summer (Candle pruning)",
-      "soilMix": "80% Lava Rock/Pumice, 20% Akadama",
-      "wiringGuide": "Wire from Autumn to Winter during dormancy.",
       "description": "Classic outdoor bonsai requiring precise sun and watering."
     },
     {
@@ -25,10 +19,126 @@
       "name": "Chinese Elm",
       "type": "Indoor",
       "difficulty": "Intermediate",
-      "pruningTime": "Spring",
-      "soilMix": "50% Organic, 50% Akadama",
-      "wiringGuide": "Wire active shoots during early growth season.",
-      "description": "Versatile tree suitable for indoor and outdoor styling."
+      "description": "Versatile tree suitable for indoor and outdoor styling with small leaves."
+    },
+    {
+      "id": "4",
+      "name": "Japanese Maple (Acer Palmatum)",
+      "type": "Outdoor",
+      "difficulty": "Advanced",
+      "description": "Stunning seasonal color changes with delicate lobed leaves."
+    },
+    {
+      "id": "5",
+      "name": "Jade Plant (Portulacaria Afra)",
+      "type": "Indoor",
+      "difficulty": "Beginner",
+      "description": "Succulent bonsai that stores water in its thick stems and leaves."
+    },
+    {
+      "id": "6",
+      "name": "Serissa Foetida (Snowrose)",
+      "type": "Indoor",
+      "difficulty": "Intermediate",
+      "description": "Produces tiny white star-like flowers throughout the year."
+    },
+    {
+      "id": "7",
+      "name": "Juniper Procumbens (Nana)",
+      "type": "Outdoor",
+      "difficulty": "Beginner",
+      "description": "The quintessential bonsai tree with needle-like evergreen foliage."
+    },
+    {
+      "id": "8",
+      "name": "Carmona Retusa (Fukien Tea)",
+      "type": "Indoor",
+      "difficulty": "Advanced",
+      "description": "Glossy dark green leaves with tiny white flowers and smooth grey bark."
+    },
+    {
+      "id": "9",
+      "name": "Bougainvillea",
+      "type": "Outdoor",
+      "difficulty": "Intermediate",
+      "description": "Vibrant paper-like bracts in pink, purple, and red hues."
+    },
+    {
+      "id": "10",
+      "name": "Bald Cypress",
+      "type": "Outdoor",
+      "difficulty": "Intermediate",
+      "description": "Deciduous conifer known for feathery soft needles and flared trunk base."
+    },
+    {
+      "id": "11",
+      "name": "Pomegranate (Punica Granatum)",
+      "type": "Outdoor",
+      "difficulty": "Intermediate",
+      "description": "Features bright orange-red flowers and miniature edible fruits."
+    },
+    {
+      "id": "12",
+      "name": "Schefflera Arboricola (Dwarf Umbrella Tree)",
+      "type": "Indoor",
+      "difficulty": "Beginner",
+      "description": "Extremely hardy tropical bonsai with glossy compound umbrella leaves."
+    },
+    {
+      "id": "13",
+      "name": "European Olive (Olea Europaea)",
+      "type": "Outdoor",
+      "difficulty": "Intermediate",
+      "description": "Silvery-green foliage with rugged, aged trunk character."
+    },
+    {
+      "id": "14",
+      "name": "Trident Maple",
+      "type": "Outdoor",
+      "difficulty": "Intermediate",
+      "description": "Known for three-lobed leaves and excellent nebari (surface root spread)."
+    },
+    {
+      "id": "15",
+      "name": "Premna Microphylla (Musadang)",
+      "type": "Indoor",
+      "difficulty": "Intermediate",
+      "description": "Fast-growing tropical bonsai with fragrant heart-shaped leaves."
+    },
+    {
+      "id": "16",
+      "name": "Azalea (Rhododendron)",
+      "type": "Outdoor",
+      "difficulty": "Advanced",
+      "description": "Famous for spectacular, colorful spring blooms in pink, red, and white."
+    },
+    {
+      "id": "17",
+      "name": "Brazilian Rain Tree",
+      "type": "Indoor",
+      "difficulty": "Advanced",
+      "description": "Feathery bipinnate leaves that fold up at night and fluffy pink puffball flowers."
+    },
+    {
+      "id": "18",
+      "name": "Boxwood (Buxus)",
+      "type": "Outdoor",
+      "difficulty": "Beginner",
+      "description": "Dense evergreen foliage with small leaves that responds well to heavy pruning."
+    },
+    {
+      "id": "19",
+      "name": "Cotoneaster",
+      "type": "Outdoor",
+      "difficulty": "Beginner",
+      "description": "Produces bright red berries and small white flowers with arching branches."
+    },
+    {
+      "id": "20",
+      "name": "Japanese Larch (Larix Kaempferi)",
+      "type": "Outdoor",
+      "difficulty": "Intermediate",
+      "description": "Deciduous conifer whose soft green needles turn golden-yellow in autumn."
     }
   ],
   "stylingGuides": [

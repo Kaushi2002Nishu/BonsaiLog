@@ -24,9 +24,9 @@ export default function StylingGuideScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16, backgroundColor: '#f4f6f7' },
-  screenTitle: { fontSize: 18, fontWeight: 'bold', color: '#2c3e50', marginBottom: 15 },
-  card: { padding: 16, backgroundColor: '#fff', borderRadius: 12, marginBottom: 12, elevation: 2, borderWidth: 1, borderColor: '#eaeded' },
-  styleTitle: { fontSize: 17, fontWeight: 'bold', color: '#117864', marginBottom: 8 },
-  description: { fontSize: 14, color: '#566573', lineHeight: 22 }
+  container: { flex: 1, padding: 20, backgroundColor: '#f0f4f1' },
+  screenTitle: { fontSize: 18, fontWeight: 'bold', color: '#1b4d3e', marginBottom: 15 },
+  card: { padding: 16, backgroundColor: '#ffffff', borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#dcd7c9', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.05, shadowRadius: 4, elevation: 2 },
+  styleTitle: { fontSize: 17, fontWeight: 'bold', color: '#795548', marginBottom: 8 },
+  description: { fontSize: 14, color: '#605852', lineHeight: 22 }
 });
