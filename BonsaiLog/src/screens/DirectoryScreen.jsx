@@ -1,135 +1,300 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState, useMemo } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+  StyleSheet,
+  useWindowDimensions,
+  Platform,
+} from 'react-native';
 import bonsaiData from '../data/bonsai.json';
 
 export default function DirectoryScreen({ navigation }) {
   const [search, setSearch] = useState('');
   const [filterType, setFilterType] = useState('All');
+  const [filterDiff, setFilterDiff] = useState('All');
+  const { width } = useWindowDimensions();
+  const columns = width >= 700 ? 3 : 2;
+  const cardWidth = columns === 3 ? '31.5%' : '48%';
 
-  const filteredData = bonsaiData.species.filter(item => {
-    const matchesSearch = item.name.toLowerCase().includes(search.toLowerCase());
-    const matchesType = filterType === 'All' || item.type === filterType;
-    return matchesSearch && matchesType;
-  });
+  const filteredData = useMemo(() => {
+    return bonsaiData.species.filter((item) => {
+      const q = search.toLowerCase().trim();
+      const matchesSearch =
+        !q ||
+        item.name.toLowerCase().includes(q) ||
+        (item.description || '').toLowerCase().includes(q);
+      const matchesType = filterType === 'All' || item.type === filterType;
+      const matchesDiff = filterDiff === 'All' || item.difficulty === filterDiff;
+      return matchesSearch && matchesType && matchesDiff;
+    });
+  }, [search, filterType, filterDiff]);
 
   return (
-    <View style={styles.container}>
-      {/* Top Header Banner with Light Green & Brown Watermark Vibe */}
-      <View style={styles.headerBanner}>
-        <View style={styles.watermarkContainer}>
-          <Text style={styles.watermarkText}>🍃 🌿 🍂</Text>
+    <View style={styles.mainContainer}>
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={true}
+        keyboardShouldPersistTaps="handled"
+        nestedScrollEnabled={true}
+      >
+        <View style={styles.headerBanner}>
+          <Text style={styles.bannerTitle}>BonsaiLog Studio</Text>
+          <Text style={styles.bannerSub}>
+            Traditional Bonsai Care & Styling Journal · {bonsaiData.species.length} species
+          </Text>
         </View>
-        <View>
-          <Text style={styles.bannerTitle}>🌿 BonsaiLog Studio</Text>
-          <Text style={styles.bannerSub}>Manage & explore your bonsai collection</Text>
-        </View>
-      </View>
 
-      {/* Navigation Shortcut Cards */}
-      <View style={styles.navRow}>
-        <TouchableOpacity style={[styles.navBtn, styles.navPrimary]} onPress={() => navigation.navigate('Collection')}>
-          <Text style={styles.navBtnTextPrimary}>🌿 My Collection</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navBtn} onPress={() => navigation.navigate('Schedule')}>
-          <Text style={styles.navBtnText}>📅 Care Logs</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navBtn} onPress={() => navigation.navigate('StylingGuide')}>
-          <Text style={styles.navBtnText}>📖 Guides</Text>
-        </TouchableOpacity>
-      </View>
-
-      <Text style={styles.sectionHeading}>Bonsai Species Directory</Text>
-
-      {/* Search Bar */}
-      <TextInput 
-        style={styles.searchInput}
-        placeholder="🔍 Search bonsai species by name..."
-        placeholderTextColor="#8c8275"
-        value={search}
-        onChangeText={setSearch}
-      />
-
-      {/* Filter Tabs */}
-      <View style={styles.filterRow}>
-        {['All', 'Indoor', 'Outdoor'].map(type => (
-          <TouchableOpacity 
-            key={type} 
-            onPress={() => setFilterType(type)}
-            style={[styles.filterBtn, filterType === type && styles.activeFilterBtn]}
+        <View style={styles.navRow}>
+          <TouchableOpacity
+            style={[styles.navBtn, styles.navPrimary]}
+            onPress={() => navigation.navigate('Collection')}
           >
-            <Text style={[styles.filterText, filterType === type && styles.activeFilterText]}>{type}</Text>
+            <Text style={styles.navBtnTextPrimary}>My Collection</Text>
           </TouchableOpacity>
-        ))}
-      </View>
+          <TouchableOpacity style={styles.navBtn} onPress={() => navigation.navigate('Schedule')}>
+            <Text style={styles.navBtnText}>Care Schedule</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.navBtn} onPress={() => navigation.navigate('StylingGuide')}>
+            <Text style={styles.navBtnText}>Styling Guide</Text>
+          </TouchableOpacity>
+        </View>
 
-      {/* Species List */}
-      <FlatList
-        data={filteredData}
-        keyExtractor={item => item.id}
-        showsVerticalScrollIndicator={false}
-        renderItem={({ item }) => (
-          <TouchableOpacity 
-            style={styles.card} 
-            onPress={() => navigation.navigate('ProfileDetail', { tree: item })}
-          >
-            <View style={styles.cardContent}>
-              <Text style={styles.title}>🌳 {item.name}</Text>
-              <Text style={styles.descSnippet} numberOfLines={1}>{item.description}</Text>
-              <View style={styles.badgeRow}>
-                <Text style={styles.badge}>Type: {item.type}</Text>
-                <Text style={[styles.badge, styles.diffBadge]}>Difficulty: {item.difficulty}</Text>
+        <Text style={styles.sectionHeading}>
+          Bonsai Directory ({filteredData.length})
+        </Text>
+
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Search species..."
+          placeholderTextColor="#8c8275"
+          value={search}
+          onChangeText={setSearch}
+        />
+
+        <Text style={styles.filterLabel}>TYPE</Text>
+        <View style={styles.filterRow}>
+          {['All', 'Indoor', 'Outdoor'].map((type) => (
+            <TouchableOpacity
+              key={type}
+              onPress={() => setFilterType(type)}
+              style={[styles.filterChip, filterType === type && styles.filterChipActive]}
+            >
+              <Text style={[styles.filterChipText, filterType === type && styles.filterChipTextActive]}>
+                {type}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        <Text style={styles.filterLabel}>DIFFICULTY</Text>
+        <View style={styles.filterRow}>
+          {['All', 'Beginner', 'Intermediate', 'Advanced'].map((d) => (
+            <TouchableOpacity
+              key={d}
+              onPress={() => setFilterDiff(d)}
+              style={[styles.filterChip, filterDiff === d && styles.filterChipActive]}
+            >
+              <Text style={[styles.filterChipText, filterDiff === d && styles.filterChipTextActive]}>
+                {d}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        <View style={styles.grid}>
+          {filteredData.map((item) => (
+            <TouchableOpacity
+              key={item.id}
+              style={[styles.card, { width: cardWidth }]}
+              onPress={() => navigation.navigate('ProfileDetail', { tree: item })}
+              activeOpacity={0.75}
+            >
+              <View style={styles.cardImage}>
+                <Text style={styles.cardEmoji}>🌳</Text>
               </View>
-            </View>
-            <View style={styles.arrowContainer}>
-              <Text style={styles.arrow}>➔</Text>
-            </View>
-          </TouchableOpacity>
-        )}
-      />
+              <Text style={styles.cardTitle} numberOfLines={2}>
+                {item.name}
+              </Text>
+              <Text style={styles.cardSub} numberOfLines={1}>
+                {item.type}
+              </Text>
+              <View
+                style={[
+                  styles.badge,
+                  item.difficulty === 'Beginner' && styles.badgeBeginner,
+                  item.difficulty === 'Intermediate' && styles.badgeIntermediate,
+                  item.difficulty === 'Advanced' && styles.badgeAdvanced,
+                ]}
+              >
+                <Text style={styles.badgeText}>{item.difficulty}</Text>
+              </View>
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        {filteredData.length === 0 ? (
+          <Text style={styles.emptyText}>No species match your filters.</Text>
+        ) : null}
+      </ScrollView>
+
+      <View style={styles.bottomNav}>
+        <TouchableOpacity style={styles.tabActive} onPress={() => navigation.navigate('Directory')}>
+          <Text style={styles.tabTextActive}>DIRECTORY</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.tab} onPress={() => navigation.navigate('Collection')}>
+          <Text style={styles.tabText}>COLLECTION</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.tab} onPress={() => navigation.navigate('StylingGuide')}>
+          <Text style={styles.tabText}>GUIDE</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: '#F7F4EF' }, // Soft Cream Background
-  headerBanner: { 
-    backgroundColor: '#D8E2DC', // Soft Light Green Background
-    padding: 18, 
-    borderRadius: 12, 
-    marginBottom: 15, 
-    borderWidth: 1, 
-    borderColor: '#C2D1C9',
-    overflow: 'hidden',
-    position: 'relative',
-    shadowColor: '#000', 
-    shadowOffset: { width: 0, height: 2 }, 
-    shadowOpacity: 0.05, 
-    shadowRadius: 4, 
-    elevation: 2 
+  mainContainer: {
+    flex: 1,
+    backgroundColor: '#F7F4EF',
+    ...Platform.select({
+      web: {
+        height: '100%',
+        maxHeight: '100vh',
+        overflow: 'hidden',
+      },
+      default: {},
+    }),
   },
-  watermarkContainer: { position: 'absolute', right: 15, top: 5, opacity: 0.35 },
-  watermarkText: { fontSize: 45, color: '#8C6239' }, // Brown watermark leaves/icons
+  scrollView: {
+    flex: 1,
+    ...Platform.select({
+      web: { height: '100%' },
+      default: {},
+    }),
+  },
+  // flex:1 මෙතන දාන්න එපා — scroll block වෙනවා
+  scrollContent: {
+    padding: 16,
+    paddingBottom: 24,
+  },
+  headerBanner: {
+    backgroundColor: '#D8E2DC',
+    paddingVertical: 18,
+    paddingHorizontal: 16,
+    borderRadius: 14,
+    marginBottom: 14,
+    borderWidth: 1,
+    borderColor: '#C2D1C9',
+  },
   bannerTitle: { fontSize: 22, fontWeight: 'bold', color: '#2C5E43' },
-  bannerSub: { fontSize: 13, color: '#5A7363', marginTop: 3 },
-  navRow: { flexDirection: 'row', gap: 10, marginBottom: 20 },
-  navBtn: { flex: 1, backgroundColor: '#FFFFFF', paddingVertical: 12, paddingHorizontal: 10, borderRadius: 10, alignItems: 'center', borderWidth: 1, borderColor: '#E3DCB9', shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.05, shadowRadius: 2, elevation: 1 },
+  bannerSub: { fontSize: 12, color: '#5A7363', marginTop: 4 },
+  navRow: { flexDirection: 'row', marginBottom: 18 },
+  navBtn: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+    paddingVertical: 11,
+    marginHorizontal: 4,
+    borderRadius: 10,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#E3DCB9',
+  },
   navPrimary: { backgroundColor: '#3B7A57', borderColor: '#3B7A57' },
-  navBtnText: { fontSize: 13, fontWeight: 'bold', color: '#4A3B32' },
-  navBtnTextPrimary: { fontSize: 13, fontWeight: 'bold', color: '#FFFFFF' },
+  navBtnText: { fontSize: 12, fontWeight: '700', color: '#4A3B32' },
+  navBtnTextPrimary: { fontSize: 12, fontWeight: '700', color: '#FFFFFF' },
   sectionHeading: { fontSize: 16, fontWeight: 'bold', color: '#4A3B32', marginBottom: 10 },
-  searchInput: { borderWidth: 1, borderColor: '#E3DCB9', padding: 14, borderRadius: 10, marginBottom: 15, backgroundColor: '#FFFFFF', fontSize: 14, color: '#4A3B32', shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.03, shadowRadius: 2 },
-  filterRow: { flexDirection: 'row', backgroundColor: '#EBE5D8', padding: 4, borderRadius: 10, marginBottom: 15 },
-  filterBtn: { flex: 1, paddingVertical: 8, alignItems: 'center', borderRadius: 8 },
-  activeFilterBtn: { backgroundColor: '#8C6239', shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.1, shadowRadius: 2, elevation: 1 },
-  filterText: { fontWeight: '600', color: '#7A6B5D', fontSize: 13 },
-  activeFilterText: { color: '#FFFFFF' },
-  card: { flexDirection: 'row', alignItems: 'center', padding: 16, backgroundColor: '#FFFFFF', borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#E3DCB9', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.05, shadowRadius: 4, elevation: 2 },
-  cardContent: { flex: 1 },
-  title: { fontSize: 16, fontWeight: 'bold', color: '#2C5E43', marginBottom: 4 },
-  descSnippet: { fontSize: 13, color: '#7A6B5D', marginBottom: 8 },
-  badgeRow: { flexDirection: 'row', gap: 8 },
-  badge: { fontSize: 11, backgroundColor: '#F4EFEA', paddingHorizontal: 8, paddingVertical: 3, borderRadius: 6, color: '#4A3B32', overflow: 'hidden', fontWeight: '500', borderWidth: 1, borderColor: '#E3DCB9' },
-  diffBadge: { backgroundColor: '#FAF0E6', color: '#8C6239', borderColor: '#E8D4C0' },
-  arrowContainer: { paddingLeft: 10 },
-  arrow: { fontSize: 16, color: '#8C6239', fontWeight: 'bold' }
+  searchInput: {
+    borderWidth: 1,
+    borderColor: '#E3DCB9',
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+    borderRadius: 10,
+    marginBottom: 14,
+    backgroundColor: '#FFFFFF',
+    fontSize: 14,
+    color: '#4A3B32',
+  },
+  filterLabel: {
+    fontSize: 11,
+    fontWeight: '700',
+    color: '#8C6239',
+    letterSpacing: 0.6,
+    marginBottom: 6,
+  },
+  filterRow: { flexDirection: 'row', flexWrap: 'wrap', marginBottom: 12 },
+  filterChip: {
+    paddingHorizontal: 12,
+    paddingVertical: 7,
+    borderRadius: 8,
+    backgroundColor: '#EBE5D8',
+    marginRight: 8,
+    marginBottom: 6,
+  },
+  filterChipActive: { backgroundColor: '#8C6239' },
+  filterChipText: { fontSize: 12, fontWeight: '600', color: '#7A6B5D' },
+  filterChipTextActive: { color: '#FFFFFF' },
+  grid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' },
+  card: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    padding: 12,
+    borderWidth: 1,
+    borderColor: '#E3DCB9',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  cardImage: {
+    width: '100%',
+    height: 88,
+    backgroundColor: '#F4EFEA',
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 8,
+    borderWidth: 1,
+    borderColor: '#EBE5D8',
+  },
+  cardEmoji: { fontSize: 36 },
+  cardTitle: {
+    fontSize: 13,
+    fontWeight: 'bold',
+    color: '#2C5E43',
+    textAlign: 'center',
+    marginBottom: 2,
+  },
+  cardSub: { fontSize: 11, color: '#7A6B5D', marginBottom: 6 },
+  badge: {
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: 6,
+    backgroundColor: '#FAF0E6',
+  },
+  badgeBeginner: { backgroundColor: '#E8F5E9' },
+  badgeIntermediate: { backgroundColor: '#E3F2FD' },
+  badgeAdvanced: { backgroundColor: '#FFF3E0' },
+  badgeText: { fontSize: 10, fontWeight: '700', color: '#5D4037' },
+  emptyText: { textAlign: 'center', color: '#8c8275', marginTop: 24, fontSize: 14 },
+  bottomNav: {
+    flexDirection: 'row',
+    backgroundColor: '#3B5E4B',
+    marginHorizontal: 12,
+    marginBottom: 10,
+    marginTop: 4,
+    borderRadius: 12,
+    padding: 6,
+  },
+  tab: { flex: 1, paddingVertical: 11, alignItems: 'center', borderRadius: 8 },
+  tabActive: {
+    flex: 1,
+    paddingVertical: 11,
+    alignItems: 'center',
+    borderRadius: 8,
+    backgroundColor: 'rgba(255,255,255,0.2)',
+  },
+  tabText: { fontSize: 11, fontWeight: '600', color: 'rgba(255,255,255,0.75)' },
+  tabTextActive: { fontSize: 11, fontWeight: 'bold', color: '#FFFFFF' },
 });

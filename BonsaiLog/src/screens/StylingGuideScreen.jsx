@@ -1,32 +1,180 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import bonsaiData from '../data/bonsai.json';
 
-export default function StylingGuideScreen() {
-  const guides = bonsaiData.stylingGuides;
+export default function StylingGuideScreen({ navigation }) {
+  const guides = (bonsaiData && bonsaiData.stylingGuides) ? bonsaiData.stylingGuides : [];
 
   return (
     <View style={styles.container}>
-      <Text style={styles.screenTitle}>Traditional Bonsai Styling Guides</Text>
+      <Text style={styles.heading}>Traditional Bonsai Styles</Text>
+      <Text style={styles.sub}>
+        Classic Japanese forms - wiring, pruning and trunk manipulation
+      </Text>
+
       <FlatList
+        style={styles.list}
         data={guides}
-        keyExtractor={item => item.id}
-        showsVerticalScrollIndicator={false}
-        renderItem={({ item }) => (
-          <View style={styles.card}>
-            <Text style={styles.styleTitle}>✨ {item.style}</Text>
-            <Text style={styles.description}>{item.description}</Text>
+        keyExtractor={function (item) { return String(item.id); }}
+        showsVerticalScrollIndicator={true}
+        contentContainerStyle={styles.listContent}
+        renderItem={function ({ item }) {
+          return (
+            <View style={styles.card}>
+              <View style={styles.thumb}>
+                <Text style={styles.thumbEmoji}>🌳</Text>
+              </View>
+              <View style={styles.cardBody}>
+                <Text style={styles.styleName}>{item.style}</Text>
+                <Text style={styles.desc}>{item.description}</Text>
+              </View>
+            </View>
+          );
+        }}
+        ListFooterComponent={
+          <View style={styles.tipBox}>
+            <Text style={styles.tipTitle}>Wiring - Pruning - Trunk Manipulation</Text>
+            <Text style={styles.tipText}>
+              Use aluminum or copper wire during dormancy. Prune to maintain silhouette.
+              Never remove more than 30 percent of foliage at once. Always work with healthy trees.
+            </Text>
           </View>
-        )}
+        }
+        ListEmptyComponent={
+          <Text style={styles.empty}>No styling guides found in data file.</Text>
+        }
       />
+
+      <View style={styles.bottomNav}>
+        <TouchableOpacity style={styles.tab} onPress={function () { navigation.navigate('Directory'); }}>
+          <Text style={styles.tabText}>DIRECTORY</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.tab} onPress={function () { navigation.navigate('Collection'); }}>
+          <Text style={styles.tabText}>COLLECTION</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.tabActive} onPress={function () { navigation.navigate('StylingGuide'); }}>
+          <Text style={styles.tabTextActive}>GUIDE</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: '#f0f4f1' },
-  screenTitle: { fontSize: 18, fontWeight: 'bold', color: '#1b4d3e', marginBottom: 15 },
-  card: { padding: 16, backgroundColor: '#ffffff', borderRadius: 12, marginBottom: 12, borderWidth: 1, borderColor: '#dcd7c9', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.05, shadowRadius: 4, elevation: 2 },
-  styleTitle: { fontSize: 17, fontWeight: 'bold', color: '#795548', marginBottom: 8 },
-  description: { fontSize: 14, color: '#605852', lineHeight: 22 }
+  container: {
+    flex: 1,
+    backgroundColor: '#F7F4EF',
+    paddingTop: 12,
+    paddingHorizontal: 16,
+  },
+  heading: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#2C5E43',
+  },
+  sub: {
+    fontSize: 12,
+    color: '#7A6B5D',
+    marginTop: 4,
+    marginBottom: 14,
+  },
+  list: {
+    flex: 1,
+  },
+  listContent: {
+    paddingBottom: 12,
+  },
+  card: {
+    flexDirection: 'row',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    padding: 14,
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: '#E3DCB9',
+  },
+  thumb: {
+    width: 56,
+    height: 56,
+    borderRadius: 10,
+    backgroundColor: '#F4EFEA',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 12,
+    borderWidth: 1,
+    borderColor: '#EBE5D8',
+  },
+  thumbEmoji: {
+    fontSize: 28,
+  },
+  cardBody: {
+    flex: 1,
+  },
+  styleName: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: '#8C6239',
+    marginBottom: 4,
+  },
+  desc: {
+    fontSize: 13,
+    color: '#566573',
+    lineHeight: 19,
+  },
+  tipBox: {
+    backgroundColor: '#D8E2DC',
+    borderRadius: 12,
+    padding: 14,
+    marginTop: 6,
+    marginBottom: 8,
+    borderWidth: 1,
+    borderColor: '#C2D1C9',
+  },
+  tipTitle: {
+    fontSize: 13,
+    fontWeight: 'bold',
+    color: '#2C5E43',
+    marginBottom: 6,
+  },
+  tipText: {
+    fontSize: 12,
+    color: '#5A7363',
+    lineHeight: 18,
+  },
+  empty: {
+    textAlign: 'center',
+    color: '#8c8275',
+    marginTop: 24,
+  },
+  bottomNav: {
+    flexDirection: 'row',
+    backgroundColor: '#3B5E4B',
+    borderRadius: 12,
+    padding: 6,
+    marginBottom: 12,
+    marginTop: 4,
+  },
+  tab: {
+    flex: 1,
+    paddingVertical: 11,
+    alignItems: 'center',
+    borderRadius: 8,
+  },
+  tabActive: {
+    flex: 1,
+    paddingVertical: 11,
+    alignItems: 'center',
+    borderRadius: 8,
+    backgroundColor: 'rgba(255,255,255,0.2)',
+  },
+  tabText: {
+    fontSize: 11,
+    fontWeight: '600',
+    color: 'rgba(255,255,255,0.75)',
+  },
+  tabTextActive: {
+    fontSize: 11,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+  },
 });

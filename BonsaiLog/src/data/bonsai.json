@@ -139,18 +139,42 @@
       "type": "Outdoor",
       "difficulty": "Intermediate",
       "description": "Deciduous conifer whose soft green needles turn golden-yellow in autumn."
-    }
-  ],
-  "stylingGuides": [
-    {
-      "id": "1",
-      "style": "Chokkan (Formal Upright)",
-      "description": "Straight trunk tapering naturally from base to top."
     },
     {
-      "id": "2",
-      "style": "Kengai (Cascade)",
-      "description": "Trunk drops below the base of the container or pot."
+      "id": "21",
+      "name": "Chinese Wisteria (Wisteria Sinensis)",
+      "type": "Outdoor",
+      "difficulty": "Advanced",
+      "description": "Famous for breathtaking cascading clusters of fragrant purple or blue flowers in spring."
     }
-  ]
+  ],
+
+  "stylingGuides": [
+  {
+    "id": "1",
+    "style": "Formal Upright (Chokkan)",
+    "description": "Straight trunk tapering naturally from base to apex. Classic, balanced, formal appearance. Best for pines and junipers with strong apical dominance."
+  },
+  {
+    "id": "2",
+    "style": "Cascade (Kengai)",
+    "description": "Trunk and branches cascade below the pot rim, mimicking a tree growing over a cliff. Requires deep pot and careful wiring."
+  },
+  {
+    "id": "3",
+    "style": "Literati (Bunjin)",
+    "description": "Elegant, sparse foliage with a slender, often curved trunk. Emphasizes movement and negative space — inspired by Chinese literati paintings."
+  },
+  {
+    "id": "4",
+    "style": "Windswept (Fukinagashi)",
+    "description": "All branches lean in one direction as if shaped by constant wind. Strong sense of motion and exposure."
+  },
+  {
+    "id": "5",
+    "style": "Informal Upright (Moyogi)",
+    "description": "Gentle curves in the trunk while the apex remains above the base. Most common and natural-looking style."
+  }
+]
 }
+
