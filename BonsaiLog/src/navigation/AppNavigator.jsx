@@ -3,6 +3,7 @@ import { Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import HomeScreen from '../screens/HomeScreen';
 import DirectoryScreen from '../screens/DirectoryScreen';
 import ProfileDetailScreen from '../screens/ProfileDetailScreen';
 import CollectionScreen from '../screens/CollectionScreen';
@@ -39,6 +40,7 @@ function DirectoryStack() {
 
 function TabIcon({ label, focused }) {
   const icons = {
+    Home: '🏠',
     Directory: '📁',
     Collection: '🌿',
     Schedule: '📅',
@@ -54,7 +56,7 @@ function TabIcon({ label, focused }) {
 export default function AppNavigator() {
   return (
     <Tab.Navigator
-      initialRouteName="Directory"
+      initialRouteName="Home"
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: '#FFFFFF',
@@ -72,6 +74,14 @@ export default function AppNavigator() {
         },
       }}
     >
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          tabBarLabel: 'HOME',
+          tabBarIcon: ({ focused }) => <TabIcon label="Home" focused={focused} />,
+        }}
+      />
       <Tab.Screen
         name="Directory"
         component={DirectoryStack}
