@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, StyleSheet } from 'react-native';
 import bonsaiData from '../data/bonsai.json';
 
-export default function StylingGuideScreen({ navigation }) {
+export default function StylingGuideScreen() {
   const guides = (bonsaiData && bonsaiData.stylingGuides) ? bonsaiData.stylingGuides : [];
 
   return (
@@ -44,18 +44,6 @@ export default function StylingGuideScreen({ navigation }) {
           <Text style={styles.empty}>No styling guides found in data file.</Text>
         }
       />
-
-      <View style={styles.bottomNav}>
-        <TouchableOpacity style={styles.tab} onPress={function () { navigation.navigate('Directory'); }}>
-          <Text style={styles.tabText}>DIRECTORY</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.tab} onPress={function () { navigation.navigate('Collection'); }}>
-          <Text style={styles.tabText}>COLLECTION</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.tabActive} onPress={function () { navigation.navigate('StylingGuide'); }}>
-          <Text style={styles.tabTextActive}>GUIDE</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 }
@@ -145,36 +133,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#8c8275',
     marginTop: 24,
-  },
-  bottomNav: {
-    flexDirection: 'row',
-    backgroundColor: '#3B5E4B',
-    borderRadius: 12,
-    padding: 6,
-    marginBottom: 12,
-    marginTop: 4,
-  },
-  tab: {
-    flex: 1,
-    paddingVertical: 11,
-    alignItems: 'center',
-    borderRadius: 8,
-  },
-  tabActive: {
-    flex: 1,
-    paddingVertical: 11,
-    alignItems: 'center',
-    borderRadius: 8,
-    backgroundColor: 'rgba(255,255,255,0.2)',
-  },
-  tabText: {
-    fontSize: 11,
-    fontWeight: '600',
-    color: 'rgba(255,255,255,0.75)',
-  },
-  tabTextActive: {
-    fontSize: 11,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
   },
 });

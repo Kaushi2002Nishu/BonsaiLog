@@ -44,7 +44,7 @@ export default function DirectoryScreen({ navigation }) {
         <View style={styles.headerBanner}>
           <Text style={styles.bannerTitle}>BonsaiLog Studio</Text>
           <Text style={styles.bannerSub}>
-            Traditional Bonsai Care & Styling Journal · {bonsaiData.species.length} species
+            Traditional Bonsai Care and Styling Journal - {bonsaiData.species.length} species
           </Text>
         </View>
 
@@ -55,10 +55,16 @@ export default function DirectoryScreen({ navigation }) {
           >
             <Text style={styles.navBtnTextPrimary}>My Collection</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.navBtn} onPress={() => navigation.navigate('Schedule')}>
+          <TouchableOpacity
+            style={styles.navBtn}
+            onPress={() => navigation.navigate('Schedule')}
+          >
             <Text style={styles.navBtnText}>Care Schedule</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.navBtn} onPress={() => navigation.navigate('StylingGuide')}>
+          <TouchableOpacity
+            style={styles.navBtn}
+            onPress={() => navigation.navigate('Guide')}
+          >
             <Text style={styles.navBtnText}>Styling Guide</Text>
           </TouchableOpacity>
         </View>
@@ -83,7 +89,12 @@ export default function DirectoryScreen({ navigation }) {
               onPress={() => setFilterType(type)}
               style={[styles.filterChip, filterType === type && styles.filterChipActive]}
             >
-              <Text style={[styles.filterChipText, filterType === type && styles.filterChipTextActive]}>
+              <Text
+                style={[
+                  styles.filterChipText,
+                  filterType === type && styles.filterChipTextActive,
+                ]}
+              >
                 {type}
               </Text>
             </TouchableOpacity>
@@ -98,7 +109,12 @@ export default function DirectoryScreen({ navigation }) {
               onPress={() => setFilterDiff(d)}
               style={[styles.filterChip, filterDiff === d && styles.filterChipActive]}
             >
-              <Text style={[styles.filterChipText, filterDiff === d && styles.filterChipTextActive]}>
+              <Text
+                style={[
+                  styles.filterChipText,
+                  filterDiff === d && styles.filterChipTextActive,
+                ]}
+              >
                 {d}
               </Text>
             </TouchableOpacity>
@@ -140,18 +156,6 @@ export default function DirectoryScreen({ navigation }) {
           <Text style={styles.emptyText}>No species match your filters.</Text>
         ) : null}
       </ScrollView>
-
-      <View style={styles.bottomNav}>
-        <TouchableOpacity style={styles.tabActive} onPress={() => navigation.navigate('Directory')}>
-          <Text style={styles.tabTextActive}>DIRECTORY</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.tab} onPress={() => navigation.navigate('Collection')}>
-          <Text style={styles.tabText}>COLLECTION</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.tab} onPress={() => navigation.navigate('StylingGuide')}>
-          <Text style={styles.tabText}>GUIDE</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 }
@@ -176,7 +180,6 @@ const styles = StyleSheet.create({
       default: {},
     }),
   },
-  // flex:1 මෙතන දාන්න එපා — scroll block වෙනවා
   scrollContent: {
     padding: 16,
     paddingBottom: 24,
@@ -190,9 +193,20 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#C2D1C9',
   },
-  bannerTitle: { fontSize: 22, fontWeight: 'bold', color: '#2C5E43' },
-  bannerSub: { fontSize: 12, color: '#5A7363', marginTop: 4 },
-  navRow: { flexDirection: 'row', marginBottom: 18 },
+  bannerTitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#2C5E43',
+  },
+  bannerSub: {
+    fontSize: 12,
+    color: '#5A7363',
+    marginTop: 4,
+  },
+  navRow: {
+    flexDirection: 'row',
+    marginBottom: 18,
+  },
   navBtn: {
     flex: 1,
     backgroundColor: '#FFFFFF',
@@ -203,10 +217,26 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#E3DCB9',
   },
-  navPrimary: { backgroundColor: '#3B7A57', borderColor: '#3B7A57' },
-  navBtnText: { fontSize: 12, fontWeight: '700', color: '#4A3B32' },
-  navBtnTextPrimary: { fontSize: 12, fontWeight: '700', color: '#FFFFFF' },
-  sectionHeading: { fontSize: 16, fontWeight: 'bold', color: '#4A3B32', marginBottom: 10 },
+  navPrimary: {
+    backgroundColor: '#3B7A57',
+    borderColor: '#3B7A57',
+  },
+  navBtnText: {
+    fontSize: 12,
+    fontWeight: '700',
+    color: '#4A3B32',
+  },
+  navBtnTextPrimary: {
+    fontSize: 12,
+    fontWeight: '700',
+    color: '#FFFFFF',
+  },
+  sectionHeading: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#4A3B32',
+    marginBottom: 10,
+  },
   searchInput: {
     borderWidth: 1,
     borderColor: '#E3DCB9',
@@ -225,7 +255,11 @@ const styles = StyleSheet.create({
     letterSpacing: 0.6,
     marginBottom: 6,
   },
-  filterRow: { flexDirection: 'row', flexWrap: 'wrap', marginBottom: 12 },
+  filterRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginBottom: 12,
+  },
   filterChip: {
     paddingHorizontal: 12,
     paddingVertical: 7,
@@ -234,10 +268,22 @@ const styles = StyleSheet.create({
     marginRight: 8,
     marginBottom: 6,
   },
-  filterChipActive: { backgroundColor: '#8C6239' },
-  filterChipText: { fontSize: 12, fontWeight: '600', color: '#7A6B5D' },
-  filterChipTextActive: { color: '#FFFFFF' },
-  grid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' },
+  filterChipActive: {
+    backgroundColor: '#8C6239',
+  },
+  filterChipText: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: '#7A6B5D',
+  },
+  filterChipTextActive: {
+    color: '#FFFFFF',
+  },
+  grid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
   card: {
     backgroundColor: '#FFFFFF',
     borderRadius: 12,
@@ -258,7 +304,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#EBE5D8',
   },
-  cardEmoji: { fontSize: 36 },
+  cardEmoji: {
+    fontSize: 36,
+  },
   cardTitle: {
     fontSize: 13,
     fontWeight: 'bold',
@@ -266,35 +314,35 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 2,
   },
-  cardSub: { fontSize: 11, color: '#7A6B5D', marginBottom: 6 },
+  cardSub: {
+    fontSize: 11,
+    color: '#7A6B5D',
+    marginBottom: 6,
+  },
   badge: {
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderRadius: 6,
     backgroundColor: '#FAF0E6',
   },
-  badgeBeginner: { backgroundColor: '#E8F5E9' },
-  badgeIntermediate: { backgroundColor: '#E3F2FD' },
-  badgeAdvanced: { backgroundColor: '#FFF3E0' },
-  badgeText: { fontSize: 10, fontWeight: '700', color: '#5D4037' },
-  emptyText: { textAlign: 'center', color: '#8c8275', marginTop: 24, fontSize: 14 },
-  bottomNav: {
-    flexDirection: 'row',
-    backgroundColor: '#3B5E4B',
-    marginHorizontal: 12,
-    marginBottom: 10,
-    marginTop: 4,
-    borderRadius: 12,
-    padding: 6,
+  badgeBeginner: {
+    backgroundColor: '#E8F5E9',
   },
-  tab: { flex: 1, paddingVertical: 11, alignItems: 'center', borderRadius: 8 },
-  tabActive: {
-    flex: 1,
-    paddingVertical: 11,
-    alignItems: 'center',
-    borderRadius: 8,
-    backgroundColor: 'rgba(255,255,255,0.2)',
+  badgeIntermediate: {
+    backgroundColor: '#E3F2FD',
   },
-  tabText: { fontSize: 11, fontWeight: '600', color: 'rgba(255,255,255,0.75)' },
-  tabTextActive: { fontSize: 11, fontWeight: 'bold', color: '#FFFFFF' },
+  badgeAdvanced: {
+    backgroundColor: '#FFF3E0',
+  },
+  badgeText: {
+    fontSize: 10,
+    fontWeight: '700',
+    color: '#5D4037',
+  },
+  emptyText: {
+    textAlign: 'center',
+    color: '#8c8275',
+    marginTop: 24,
+    fontSize: 14,
+  },
 });
