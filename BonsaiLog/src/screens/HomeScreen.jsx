@@ -5,6 +5,7 @@ import {
   ScrollView,
   TouchableOpacity,
   StyleSheet,
+  Platform,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import bonsaiData from '../data/bonsai.json';
@@ -12,6 +13,7 @@ import LeafWatermark from '../components/LeafWatermark';
 
 export default function HomeScreen({ navigation }) {
   const [collectionCount, setCollectionCount] = useState(0);
+  const [hoveredCard, setHoveredCard] = useState(null);
 
   useEffect(() => {
     const loadCount = async () => {
@@ -40,7 +42,6 @@ export default function HomeScreen({ navigation }) {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        {/* Hero */}
         <View style={styles.hero}>
           <Text style={styles.heroEmoji}>🌳</Text>
           <Text style={styles.heroTitle}>BonsaiLog</Text>
@@ -49,7 +50,6 @@ export default function HomeScreen({ navigation }) {
           </Text>
         </View>
 
-        {/* Stats */}
         <View style={styles.statsRow}>
           <View style={styles.statCard}>
             <Text style={styles.statNum}>{speciesCount}</Text>
@@ -65,75 +65,144 @@ export default function HomeScreen({ navigation }) {
           </View>
         </View>
 
-        {/* Quick actions */}
         <Text style={styles.sectionTitle}>Quick Access</Text>
         <View style={styles.actionsGrid}>
+          
+          {/* Species Directory Card */}
           <TouchableOpacity
-            style={[styles.actionCard, styles.actionPrimary]}
+            style={[
+              styles.actionCard, 
+              hoveredCard === 'dir' && styles.actionCardHoveredDark
+            ]}
             onPress={() => navigation.navigate('Directory')}
+            {...Platform.select({
+              web: {
+                onMouseEnter: () => setHoveredCard('dir'),
+                onMouseLeave: () => setHoveredCard(null),
+              },
+            })}
+            activeOpacity={0.9}
           >
             <Text style={styles.actionEmoji}>📁</Text>
-            <Text style={styles.actionTextPrimary}>Species Directory</Text>
-            <Text style={[styles.actionHint, { color: 'rgba(255,255,255,0.75)' }]}>
+            <Text style={[styles.actionText, hoveredCard === 'dir' && styles.textWhite]}>
+              Species Directory
+            </Text>
+            <Text style={[styles.actionHint, hoveredCard === 'dir' && styles.textWhiteSub]}>
               Browse & learn
             </Text>
           </TouchableOpacity>
 
+          {/* My Collection Card */}
           <TouchableOpacity
-            style={styles.actionCard}
+            style={[
+              styles.actionCard, 
+              hoveredCard === 'col' && styles.actionCardHoveredDark
+            ]}
             onPress={() => navigation.navigate('Collection')}
+            {...Platform.select({
+              web: {
+                onMouseEnter: () => setHoveredCard('col'),
+                onMouseLeave: () => setHoveredCard(null),
+              },
+            })}
+            activeOpacity={0.9}
           >
             <Text style={styles.actionEmoji}>🌿</Text>
-            <Text style={styles.actionText}>My Collection</Text>
-            <Text style={styles.actionHint}>Your garden</Text>
+            <Text style={[styles.actionText, hoveredCard === 'col' && styles.textWhite]}>
+              My Collection
+            </Text>
+            <Text style={[styles.actionHint, hoveredCard === 'col' && styles.textWhiteSub]}>
+              Your garden
+            </Text>
           </TouchableOpacity>
 
+          {/* Care Schedule Card */}
           <TouchableOpacity
-            style={styles.actionCard}
+            style={[
+              styles.actionCard, 
+              hoveredCard === 'sch' && styles.actionCardHoveredDark
+            ]}
             onPress={() => navigation.navigate('Schedule')}
+            {...Platform.select({
+              web: {
+                onMouseEnter: () => setHoveredCard('sch'),
+                onMouseLeave: () => setHoveredCard(null),
+              },
+            })}
+            activeOpacity={0.9}
           >
             <Text style={styles.actionEmoji}>📅</Text>
-            <Text style={styles.actionText}>Care Schedule</Text>
-            <Text style={styles.actionHint}>Water & prune</Text>
+            <Text style={[styles.actionText, hoveredCard === 'sch' && styles.textWhite]}>
+              Care Schedule
+            </Text>
+            <Text style={[styles.actionHint, hoveredCard === 'sch' && styles.textWhiteSub]}>
+              Water & prune
+            </Text>
           </TouchableOpacity>
 
+          {/* Styling Guide Card */}
           <TouchableOpacity
-            style={styles.actionCard}
+            style={[
+              styles.actionCard, 
+              hoveredCard === 'gui' && styles.actionCardHoveredDark
+            ]}
             onPress={() => navigation.navigate('Guide')}
+            {...Platform.select({
+              web: {
+                onMouseEnter: () => setHoveredCard('gui'),
+                onMouseLeave: () => setHoveredCard(null),
+              },
+            })}
+            activeOpacity={0.9}
           >
             <Text style={styles.actionEmoji}>📖</Text>
-            <Text style={styles.actionText}>Styling Guide</Text>
-            <Text style={styles.actionHint}>Classic forms</Text>
+            <Text style={[styles.actionText, hoveredCard === 'gui' && styles.textWhite]}>
+              Styling Guide
+            </Text>
+            <Text style={[styles.actionHint, hoveredCard === 'gui' && styles.textWhiteSub]}>
+              Classic forms
+            </Text>
           </TouchableOpacity>
+
         </View>
 
-        {/* Featured species */}
         <Text style={styles.sectionTitle}>Featured Species</Text>
-        {featured.map((item) => (
-          <TouchableOpacity
-            key={item.id}
-            style={styles.featuredCard}
-            onPress={() =>
-              navigation.navigate('Directory', {
-                screen: 'ProfileDetail',
-                params: { tree: item },
-              })
-            }
-          >
-            <View style={styles.featuredLeft}>
-              <Text style={styles.featuredEmoji}>🪴</Text>
-            </View>
-            <View style={styles.featuredBody}>
-              <Text style={styles.featuredName}>{item.name}</Text>
-              <Text style={styles.featuredMeta}>
-                {item.type} · {item.difficulty}
-              </Text>
-              <Text style={styles.featuredDesc} numberOfLines={2}>
-                {item.description}
-              </Text>
-            </View>
-          </TouchableOpacity>
-        ))}
+        {featured.map((item, index) => {
+          const cardId = `feat_${index}`;
+          const isHovered = hoveredCard === cardId;
+          return (
+            <TouchableOpacity
+              key={item.id}
+              style={[styles.featuredCard, isHovered && styles.actionCardHoveredDark]}
+              onPress={() =>
+                navigation.navigate('Directory', {
+                  screen: 'ProfileDetail',
+                  params: { tree: item },
+                })
+              }
+              {...Platform.select({
+                web: {
+                  onMouseEnter: () => setHoveredCard(cardId),
+                  onMouseLeave: () => setHoveredCard(null),
+                },
+              })}
+              activeOpacity={0.9}
+            >
+              <View style={styles.featuredLeft}>
+                <Text style={styles.featuredEmoji}>🪴</Text>
+              </View>
+              <View style={styles.featuredBody}>
+                <Text style={[styles.featuredName, isHovered && styles.textWhite]}>{item.name}</Text>
+                <Text style={[styles.featuredMeta, isHovered && styles.textWhiteSub]}>
+                  {item.type} · {item.difficulty}
+                </Text>
+                <Text style={[styles.featuredDesc, isHovered && styles.textWhiteSub]} numberOfLines={2}>
+                  {item.description}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          );
+        })}
 
         <View style={styles.footerTip}>
           <Text style={styles.tipTitle}>Tip of the day</Text>
@@ -226,14 +295,30 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     borderRadius: 14,
     padding: 16,
+    borderWidth: 1,
+    borderColor: '#E3DCB9',
     elevation: 2,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.06,
     shadowRadius: 3,
+    ...Platform.select({
+      web: {
+        transitionProperty: 'transform, box-shadow, background-color, border-color',
+        transitionDuration: '200ms',
+        cursor: 'pointer',
+      },
+    }),
   },
-  actionPrimary: {
-    backgroundColor: '#3B5E4B',
+  actionCardHoveredDark: {
+    backgroundColor: '#3B7A57',
+    borderColor: '#3B7A57',
+    ...Platform.select({
+      web: {
+        transform: [{ translateY: -3 }],
+        boxShadow: '0px 6px 14px rgba(44, 94, 67, 0.2)',
+      },
+    }),
   },
   actionEmoji: {
     fontSize: 26,
@@ -244,15 +329,16 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#2C5E43',
   },
-  actionTextPrimary: {
-    fontSize: 14,
-    fontWeight: '700',
-    color: '#FFFFFF',
-  },
   actionHint: {
     fontSize: 12,
     color: '#8A9A8C',
     marginTop: 3,
+  },
+  textWhite: {
+    color: '#FFFFFF',
+  },
+  textWhiteSub: {
+    color: 'rgba(255,255,255,0.85)',
   },
   featuredCard: {
     flexDirection: 'row',
@@ -261,11 +347,20 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 12,
     padding: 14,
+    borderWidth: 1,
+    borderColor: '#E3DCB9',
     elevation: 2,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.06,
     shadowRadius: 3,
+    ...Platform.select({
+      web: {
+        transitionProperty: 'transform, box-shadow, background-color, border-color',
+        transitionDuration: '200ms',
+        cursor: 'pointer',
+      },
+    }),
   },
   featuredLeft: {
     width: 48,
