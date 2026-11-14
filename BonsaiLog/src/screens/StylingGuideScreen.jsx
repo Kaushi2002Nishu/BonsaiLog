@@ -1,12 +1,14 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import bonsaiData from '../data/bonsai.json';
+import LeafWatermark from '../components/LeafWatermark';
 
 export default function StylingGuideScreen() {
   const guides = (bonsaiData && bonsaiData.stylingGuides) ? bonsaiData.stylingGuides : [];
 
   return (
     <View style={styles.container}>
+      <LeafWatermark />
       <Text style={styles.heading}>Traditional Bonsai Styles</Text>
       <Text style={styles.sub}>
         Classic Japanese forms - wiring, pruning and trunk manipulation
