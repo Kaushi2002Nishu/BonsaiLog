@@ -8,9 +8,34 @@ import {
   StyleSheet,
   useWindowDimensions,
   Platform,
+  Image,
 } from 'react-native';
 import bonsaiData from '../data/bonsai.json';
 import HoverCard from '../components/HoverCard';
+
+const imageMap = {
+  aged_Ficus_Retusa: require('../../assets/aged_Ficus_Retusa.webp'),
+  Japanese_Black_Pine: require('../../assets/Japanese_Black_Pine.webp'),
+  Chinese_Elm: require('../../assets/Chinese_Elm.webp'),
+  Japanese_Maple: require('../../assets/Japanese_Maple.webp'),
+  Dwarf_Jade: require('../../assets/Dwarf_Jade.webp'),
+  Snowrose: require('../../assets/Snowrose.webp'),
+  Juniper_Nana: require('../../assets/Juniper_Nana.webp'),
+  Fukien_Tea: require('../../assets/Fukien_Tea.webp'),
+  Bougainvillea: require('../../assets/Bougainvillea.webp'),
+  Bald_Cypress: require('../../assets/Bald_Cypress.webp'),
+  Pomegranate: require('../../assets/Pomegranate.webp'),
+  Dwarf_Umbrella_Tree: require('../../assets/Dwarf_Umbrella_Tree.webp'),
+  ancient_Olive: require('../../assets/ancient_Olive.webp'),
+  Trident_Maple: require('../../assets/Trident_Maple.webp'),
+  Premna_Microphylla: require('../../assets/Premna_Microphylla.webp'),
+  Azalea: require('../../assets/Azalea.webp'),
+  Brazilian_Rain_Tree: require('../../assets/Brazilian_Rain_Tree.webp'),
+  Boxwood: require('../../assets/Boxwood.webp'),
+  Cotoneaster: require('../../assets/Cotoneaster.webp'),
+  Japanese_Larch: require('../../assets/Japanese_Larch.webp'),
+  Chinese_Wisteria: require('../../assets/Chinese_Wisteria.webp'),
+};
 
 export default function DirectoryScreen({ navigation }) {
   const [search, setSearch] = useState('');
@@ -123,33 +148,40 @@ export default function DirectoryScreen({ navigation }) {
         </View>
 
         <View style={styles.grid}>
-          {filteredData.map((item) => (
-            <HoverCard
-              key={item.id}
-              style={[styles.card, { width: cardWidth }]}
-              onPress={() => navigation.navigate('ProfileDetail', { tree: item })}
-            >
-              <View style={styles.cardImage}>
-                <Text style={styles.cardEmoji}>🌳</Text>
-              </View>
-              <Text style={styles.cardTitle} numberOfLines={2}>
-                {item.name}
-              </Text>
-              <Text style={styles.cardSub} numberOfLines={1}>
-                {item.type}
-              </Text>
-              <View
-                style={[
-                  styles.badge,
-                  item.difficulty === 'Beginner' && styles.badgeBeginner,
-                  item.difficulty === 'Intermediate' && styles.badgeIntermediate,
-                  item.difficulty === 'Advanced' && styles.badgeAdvanced,
-                ]}
+          {filteredData.map((item) => {
+            const treeImage = imageMap[item.image];
+            return (
+              <HoverCard
+                key={item.id}
+                style={[styles.card, { width: cardWidth }]}
+                onPress={() => navigation.navigate('ProfileDetail', { tree: item })}
               >
-                <Text style={styles.badgeText}>{item.difficulty}</Text>
-              </View>
-            </HoverCard>
-          ))}
+                <View style={styles.cardImage}>
+                  {treeImage ? (
+                    <Image source={treeImage} style={styles.treePhoto} />
+                  ) : (
+                    <Text style={styles.cardEmoji}>🌳</Text>
+                  )}
+                </View>
+                <Text style={styles.cardTitle} numberOfLines={2}>
+                  {item.name}
+                </Text>
+                <Text style={styles.cardSub} numberOfLines={1}>
+                  {item.type}
+                </Text>
+                <View
+                  style={[
+                    styles.badge,
+                    item.difficulty === 'Beginner' && styles.badgeBeginner,
+                    item.difficulty === 'Intermediate' && styles.badgeIntermediate,
+                    item.difficulty === 'Advanced' && styles.badgeAdvanced,
+                  ]}
+                >
+                  <Text style={styles.badgeText}>{item.difficulty}</Text>
+                </View>
+              </HoverCard>
+            );
+          })}
         </View>
 
         {filteredData.length === 0 ? (
@@ -292,7 +324,7 @@ const styles = StyleSheet.create({
   },
   cardImage: {
     width: '100%',
-    height: 88,
+    aspectRatio: 1, 
     backgroundColor: '#F4EFEA',
     borderRadius: 8,
     justifyContent: 'center',
@@ -300,6 +332,12 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     borderWidth: 1,
     borderColor: '#EBE5D8',
+    overflow: 'hidden',
+  },
+  treePhoto: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
   },
   cardEmoji: {
     fontSize: 36,

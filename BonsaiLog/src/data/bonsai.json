@@ -5,176 +5,195 @@
       "name": "Ficus Retusa (Banyan Bonsai)",
       "type": "Indoor",
       "difficulty": "Beginner",
-      "description": "Very forgiving indoor bonsai ideal for beginners with aerial roots."
+      "description": "Very forgiving indoor bonsai ideal for beginners with aerial roots.",
+      "image": "aged_Ficus_Retusa"
     },
     {
       "id": "2",
       "name": "Japanese Black Pine",
       "type": "Outdoor",
       "difficulty": "Advanced",
-      "description": "Classic outdoor bonsai requiring precise sun and watering."
+      "description": "Classic outdoor bonsai requiring precise sun and watering.",
+      "image": "Japanese_Black_Pine"
     },
     {
       "id": "3",
       "name": "Chinese Elm",
       "type": "Indoor",
       "difficulty": "Intermediate",
-      "description": "Versatile tree suitable for indoor and outdoor styling with small leaves."
+      "description": "Versatile tree suitable for indoor and outdoor styling with small leaves.",
+      "image": "Chinese_Elm"
     },
     {
       "id": "4",
       "name": "Japanese Maple (Acer Palmatum)",
       "type": "Outdoor",
       "difficulty": "Advanced",
-      "description": "Stunning seasonal color changes with delicate lobed leaves."
+      "description": "Stunning seasonal color changes with delicate lobed leaves.",
+      "image": "Japanese_Maple"
     },
     {
       "id": "5",
       "name": "Jade Plant (Portulacaria Afra)",
       "type": "Indoor",
       "difficulty": "Beginner",
-      "description": "Succulent bonsai that stores water in its thick stems and leaves."
+      "description": "Succulent bonsai that stores water in its thick stems and leaves.",
+      "image": "Dwarf_Jade"
     },
     {
       "id": "6",
       "name": "Serissa Foetida (Snowrose)",
       "type": "Indoor",
       "difficulty": "Intermediate",
-      "description": "Produces tiny white star-like flowers throughout the year."
+      "description": "Produces tiny white star-like flowers throughout the year.",
+      "image": "Snowrose"
     },
     {
       "id": "7",
       "name": "Juniper Procumbens (Nana)",
       "type": "Outdoor",
       "difficulty": "Beginner",
-      "description": "The quintessential bonsai tree with needle-like evergreen foliage."
+      "description": "The quintessential bonsai tree with needle-like evergreen foliage.",
+      "image": "Juniper_Nana"
     },
     {
       "id": "8",
       "name": "Carmona Retusa (Fukien Tea)",
       "type": "Indoor",
       "difficulty": "Advanced",
-      "description": "Glossy dark green leaves with tiny white flowers and smooth grey bark."
+      "description": "Glossy dark green leaves with tiny white flowers and smooth grey bark.",
+      "image": "Fukien_Tea"
     },
     {
       "id": "9",
       "name": "Bougainvillea",
       "type": "Outdoor",
       "difficulty": "Intermediate",
-      "description": "Vibrant paper-like bracts in pink, purple, and red hues."
+      "description": "Vibrant paper-like bracts in pink, purple, and red hues.",
+      "image": "Bougainvillea"
     },
     {
       "id": "10",
       "name": "Bald Cypress",
       "type": "Outdoor",
       "difficulty": "Intermediate",
-      "description": "Deciduous conifer known for feathery soft needles and flared trunk base."
+      "description": "Deciduous conifer known for feathery soft needles and flared trunk base.",
+      "image": "Bald_Cypress"
     },
     {
       "id": "11",
       "name": "Pomegranate (Punica Granatum)",
       "type": "Outdoor",
       "difficulty": "Intermediate",
-      "description": "Features bright orange-red flowers and miniature edible fruits."
+      "description": "Features bright orange-red flowers and miniature edible fruits.",
+      "image": "Pomegranate"
     },
     {
       "id": "12",
       "name": "Schefflera Arboricola (Dwarf Umbrella Tree)",
       "type": "Indoor",
       "difficulty": "Beginner",
-      "description": "Extremely hardy tropical bonsai with glossy compound umbrella leaves."
+      "description": "Extremely hardy tropical bonsai with glossy compound umbrella leaves.",
+      "image": "Dwarf_Umbrella_Tree"
     },
     {
       "id": "13",
       "name": "European Olive (Olea Europaea)",
       "type": "Outdoor",
       "difficulty": "Intermediate",
-      "description": "Silvery-green foliage with rugged, aged trunk character."
+      "description": "Silvery-green foliage with rugged, aged trunk character.",
+      "image": "ancient_Olive"
     },
     {
       "id": "14",
       "name": "Trident Maple",
       "type": "Outdoor",
       "difficulty": "Intermediate",
-      "description": "Known for three-lobed leaves and excellent nebari (surface root spread)."
+      "description": "Known for three-lobed leaves and excellent nebari (surface root spread).",
+      "image": "Trident_Maple"
     },
     {
       "id": "15",
       "name": "Premna Microphylla (Musadang)",
       "type": "Indoor",
       "difficulty": "Intermediate",
-      "description": "Fast-growing tropical bonsai with fragrant heart-shaped leaves."
+      "description": "Fast-growing tropical bonsai with fragrant heart-shaped leaves.",
+      "image": "Premna_Microphylla"
     },
     {
       "id": "16",
       "name": "Azalea (Rhododendron)",
       "type": "Outdoor",
       "difficulty": "Advanced",
-      "description": "Famous for spectacular, colorful spring blooms in pink, red, and white."
+      "description": "Famous for spectacular, colorful spring blooms in pink, red, and white.",
+      "image": "Azalea"
     },
     {
       "id": "17",
       "name": "Brazilian Rain Tree",
       "type": "Indoor",
       "difficulty": "Advanced",
-      "description": "Feathery bipinnate leaves that fold up at night and fluffy pink puffball flowers."
+      "description": "Feathery bipinnate leaves that fold up at night and fluffy pink puffball flowers.",
+      "image": "Brazilian_Rain_Tree"
     },
     {
       "id": "18",
       "name": "Boxwood (Buxus)",
       "type": "Outdoor",
       "difficulty": "Beginner",
-      "description": "Dense evergreen foliage with small leaves that responds well to heavy pruning."
+      "description": "Dense evergreen foliage with small leaves that responds well to heavy pruning.",
+      "image": "Boxwood"
     },
     {
       "id": "19",
       "name": "Cotoneaster",
       "type": "Outdoor",
       "difficulty": "Beginner",
-      "description": "Produces bright red berries and small white flowers with arching branches."
+      "description": "Produces bright red berries and small white flowers with arching branches.",
+      "image": "Cotoneaster"
     },
     {
       "id": "20",
       "name": "Japanese Larch (Larix Kaempferi)",
       "type": "Outdoor",
       "difficulty": "Intermediate",
-      "description": "Deciduous conifer whose soft green needles turn golden-yellow in autumn."
+      "description": "Deciduous conifer whose soft green needles turn golden-yellow in autumn.",
+      "image": "Japanese_Larch"
     },
     {
       "id": "21",
       "name": "Chinese Wisteria (Wisteria Sinensis)",
       "type": "Outdoor",
       "difficulty": "Advanced",
-      "description": "Famous for breathtaking cascading clusters of fragrant purple or blue flowers in spring."
+      "description": "Famous for breathtaking cascading clusters of fragrant purple or blue flowers in spring.",
+      "image": "Chinese_Wisteria"
     }
   ],
-
   "stylingGuides": [
-  {
-    "id": "1",
-    "style": "Formal Upright (Chokkan)",
-    "description": "Straight trunk tapering naturally from base to apex. Classic, balanced, formal appearance. Best for pines and junipers with strong apical dominance."
-  },
-  {
-    "id": "2",
-    "style": "Cascade (Kengai)",
-    "description": "Trunk and branches cascade below the pot rim, mimicking a tree growing over a cliff. Requires deep pot and careful wiring."
-  },
-  {
-    "id": "3",
-    "style": "Literati (Bunjin)",
-    "description": "Elegant, sparse foliage with a slender, often curved trunk. Emphasizes movement and negative space — inspired by Chinese literati paintings."
-  },
-  {
-    "id": "4",
-    "style": "Windswept (Fukinagashi)",
-    "description": "All branches lean in one direction as if shaped by constant wind. Strong sense of motion and exposure."
-  },
-  {
-    "id": "5",
-    "style": "Informal Upright (Moyogi)",
-    "description": "Gentle curves in the trunk while the apex remains above the base. Most common and natural-looking style."
-  }
-]
+    {
+      "id": "1",
+      "style": "Formal Upright (Chokkan)",
+      "description": "Straight trunk tapering naturally from base to apex. Classic, balanced, formal appearance. Best for pines and junipers with strong apical dominance."
+    },
+    {
+      "id": "2",
+      "style": "Cascade (Kengai)",
+      "description": "Trunk and branches cascade below the pot rim, mimicking a tree growing over a cliff. Requires deep pot and careful wiring."
+    },
+    {
+      "id": "3",
+      "style": "Literati (Bunjin)",
+      "description": "Elegant, sparse foliage with a slender, often curved trunk. Emphasizes movement and negative space — inspired by Chinese literati paintings."
+    },
+    {
+      "id": "4",
+      "style": "Windswept (Fukinagashi)",
+      "description": "All branches lean in one direction as if shaped by constant wind. Strong sense of motion and exposure."
+    },
+    {
+      "id": "5",
+      "style": "Informal Upright (Moyogi)",
+      "description": "Gentle curves in the trunk while the apex remains above the base. Most common and natural-looking style."
+    }
+  ]
 }
-
