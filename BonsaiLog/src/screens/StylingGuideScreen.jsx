@@ -1,12 +1,6 @@
-<<<<<<< Updated upstream
-import React from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
-import bonsaiData from '../data/bonsai.json';
-=======
 import React, { useState } from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import LeafWatermark from '../components/LeafWatermark';
->>>>>>> Stashed changes
 
 export default function StylingGuideScreen() {
   const [hoveredId, setHoveredId] = useState(null);
@@ -15,57 +9,56 @@ export default function StylingGuideScreen() {
     {
       id: '1',
       title: 'Formal Upright (Chokkan)',
-      description: 'Straight trunk tapering naturally from base to apex. Classic, balanced, formal appearance. Best for pines and junipers with strong apical dominance.',
-      emoji: '🌲'
+      description:
+        'Straight trunk tapering naturally from base to apex. Classic, balanced, formal appearance. Best for pines and junipers with strong apical dominance.',
+      emoji: '🌲',
     },
     {
       id: '2',
       title: 'Cascade (Kengai)',
-      description: 'Trunk and branches cascade below the pot rim, mimicking a tree growing over a cliff. Requires deep pot and careful wiring.',
-      emoji: '🌿'
+      description:
+        'Trunk and branches cascade below the pot rim, mimicking a tree growing over a cliff. Requires deep pot and careful wiring.',
+      emoji: '🌿',
     },
     {
       id: '3',
       title: 'Literati (Bunjin)',
-      description: 'Elegant, sparse foliage with a slender, often curved trunk. Emphasizes movement and negative space — inspired by Chinese literati paintings.',
-      emoji: '🍃'
+      description:
+        'Elegant, sparse foliage with a slender, often curved trunk. Emphasizes movement and negative space — inspired by Chinese literati paintings.',
+      emoji: '🍃',
     },
     {
       id: '4',
       title: 'Windswept (Fukinagashi)',
-      description: 'All branches lean in one direction as if shaped by constant wind. Strong sense of motion and exposure.',
-      emoji: '🎋'
+      description:
+        'All branches lean in one direction as if shaped by constant wind. Strong sense of motion and exposure.',
+      emoji: '🎋',
     },
     {
       id: '5',
       title: 'Informal Upright (Moyogi)',
-      description: 'Gentle curves in the trunk while the apex remains above the base. Most common and natural-looking style.',
-      emoji: '🌳'
-    }
+      description:
+        'Gentle curves in the trunk while the apex remains above the base. Most common and natural-looking style.',
+      emoji: '🌳',
+    },
   ];
 
   return (
-<<<<<<< Updated upstream
-    <View style={styles.container}>
-      <Text style={styles.heading}>Traditional Bonsai Styles</Text>
-      <Text style={styles.sub}>
-        Classic Japanese forms - wiring, pruning and trunk manipulation
-      </Text>
-=======
     <View style={styles.screen}>
       <LeafWatermark />
-      
-      <ScrollView 
+
+      <ScrollView
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
         <Text style={styles.screenTitle}>Styling Techniques Guide</Text>
-        
+
         <View style={styles.introCard}>
           <Text style={styles.introTitle}>Traditional Bonsai Styles</Text>
-          <Text style={styles.introSub}>Classic Japanese forms - wiring, pruning and trunk manipulation</Text>
+          <Text style={styles.introSub}>
+            Classic Japanese forms - wiring, pruning and trunk manipulation
+          </Text>
         </View>
->>>>>>> Stashed changes
 
         <View style={styles.listSection}>
           {guideItems.map((item) => {
@@ -106,10 +99,10 @@ export default function StylingGuideScreen() {
         >
           <Text style={styles.extraTitle}>Wiring - Pruning - Trunk Manipulation</Text>
           <Text style={styles.extraDesc}>
-            Use aluminum or copper wire during dormancy. Prune to maintain silhouette. Never remove more than 20 percent of foliage at a time to keep your tree healthy.
+            Use aluminum or copper wire during dormancy. Prune to maintain silhouette. Never
+            remove more than 20 percent of foliage at a time to keep your tree healthy.
           </Text>
         </TouchableOpacity>
-
       </ScrollView>
     </View>
   );
@@ -177,8 +170,8 @@ const styles = StyleSheet.create({
     }),
   },
   cardHovered: {
-    backgroundColor: '#F0F5F1', // Light green tint background
-    borderColor: '#8FA89B',    // Soft sage border highlight
+    backgroundColor: '#F0F5F1',
+    borderColor: '#8FA89B',
     ...Platform.select({
       web: {
         transform: [{ translateY: -3 }],
@@ -229,8 +222,8 @@ const styles = StyleSheet.create({
     }),
   },
   extraCardHovered: {
-    backgroundColor: '#FAF5F0', // Light brown / warm cream tint background
-    borderColor: '#C8A888',    // Soft warm bronze border highlight
+    backgroundColor: '#FAF5F0',
+    borderColor: '#C8A888',
     ...Platform.select({
       web: {
         transform: [{ translateY: -3 }],
