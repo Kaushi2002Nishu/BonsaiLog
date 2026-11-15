@@ -58,11 +58,11 @@ All personal data is stored locally on-device, so your collection works offline 
 
 | Home | Directory | Collection |
 | :---: | :---: | :---: |
-| ![Home](assets/screenshots/home.png) | ![Directory](assets/screenshots/directory.png) | ![Collection](assets/screenshots/collection.png) |
+| ![Home](BonsaiLog/assets/screenshots/home.png) | ![Directory](BonsaiLog/assets/screenshots/directory.png) | ![Collection](BonsaiLog/assets/screenshots/collection.png) |
 
 | Schedule | Styling Guide |
 | :---: | :---: |
-| ![Schedule](assets/screenshots/schedule.png) | ![Guide](assets/screenshots/guide.png) |
+| ![Schedule](BonsaiLog/assets/screenshots/schedule.png) | ![Guide](BonsaiLog/assets/screenshots/guide.png) |
 
 ---
 
