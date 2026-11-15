@@ -1,91 +1,187 @@
-import React from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
-import bonsaiData from '../data/bonsai.json';
+import React, { useState } from 'react';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import LeafWatermark from '../components/LeafWatermark';
 
 export default function StylingGuideScreen() {
-  const guides = (bonsaiData && bonsaiData.stylingGuides) ? bonsaiData.stylingGuides : [];
+  const [hoveredId, setHoveredId] = useState(null);
+
+  const guideItems = [
+    {
+      id: '1',
+      title: 'Formal Upright (Chokkan)',
+      description:
+        'Straight trunk tapering naturally from base to apex. Classic, balanced, formal appearance. Best for pines and junipers with strong apical dominance.',
+      emoji: '🌲',
+    },
+    {
+      id: '2',
+      title: 'Cascade (Kengai)',
+      description:
+        'Trunk and branches cascade below the pot rim, mimicking a tree growing over a cliff. Requires deep pot and careful wiring.',
+      emoji: '🌿',
+    },
+    {
+      id: '3',
+      title: 'Literati (Bunjin)',
+      description:
+        'Elegant, sparse foliage with a slender, often curved trunk. Emphasizes movement and negative space — inspired by Chinese literati paintings.',
+      emoji: '🍃',
+    },
+    {
+      id: '4',
+      title: 'Windswept (Fukinagashi)',
+      description:
+        'All branches lean in one direction as if shaped by constant wind. Strong sense of motion and exposure.',
+      emoji: '🎋',
+    },
+    {
+      id: '5',
+      title: 'Informal Upright (Moyogi)',
+      description:
+        'Gentle curves in the trunk while the apex remains above the base. Most common and natural-looking style.',
+      emoji: '🌳',
+    },
+  ];
 
   return (
-    <View style={styles.container}>
+    <View style={styles.screen}>
       <LeafWatermark />
-      <Text style={styles.heading}>Traditional Bonsai Styles</Text>
-      <Text style={styles.sub}>
-        Classic Japanese forms - wiring, pruning and trunk manipulation
-      </Text>
 
-      <FlatList
-        style={styles.list}
-        data={guides}
-        keyExtractor={function (item) { return String(item.id); }}
-        showsVerticalScrollIndicator={true}
-        contentContainerStyle={styles.listContent}
-        renderItem={function ({ item }) {
-          return (
-            <View style={styles.card}>
-              <View style={styles.thumb}>
-                <Text style={styles.thumbEmoji}>🌳</Text>
-              </View>
-              <View style={styles.cardBody}>
-                <Text style={styles.styleName}>{item.style}</Text>
-                <Text style={styles.desc}>{item.description}</Text>
-              </View>
-            </View>
-          );
-        }}
-        ListFooterComponent={
-          <View style={styles.tipBox}>
-            <Text style={styles.tipTitle}>Wiring - Pruning - Trunk Manipulation</Text>
-            <Text style={styles.tipText}>
-              Use aluminum or copper wire during dormancy. Prune to maintain silhouette.
-              Never remove more than 30 percent of foliage at once. Always work with healthy trees.
-            </Text>
-          </View>
-        }
-        ListEmptyComponent={
-          <Text style={styles.empty}>No styling guides found in data file.</Text>
-        }
-      />
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
+        <Text style={styles.screenTitle}>Styling Techniques Guide</Text>
+
+        <View style={styles.introCard}>
+          <Text style={styles.introTitle}>Traditional Bonsai Styles</Text>
+          <Text style={styles.introSub}>
+            Classic Japanese forms - wiring, pruning and trunk manipulation
+          </Text>
+        </View>
+
+        <View style={styles.listSection}>
+          {guideItems.map((item) => {
+            const isHovered = hoveredId === item.id;
+            return (
+              <TouchableOpacity
+                key={item.id}
+                style={[styles.card, isHovered && styles.cardHovered]}
+                activeOpacity={1}
+                {...Platform.select({
+                  web: {
+                    onMouseEnter: () => setHoveredId(item.id),
+                    onMouseLeave: () => setHoveredId(null),
+                  },
+                })}
+              >
+                <View style={styles.cardIconBox}>
+                  <Text style={{ fontSize: 22 }}>{item.emoji}</Text>
+                </View>
+                <View style={styles.cardContent}>
+                  <Text style={styles.cardTitle}>{item.title}</Text>
+                  <Text style={styles.cardDesc}>{item.description}</Text>
+                </View>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+
+        <TouchableOpacity
+          style={[styles.extraCard, hoveredId === 'extra' && styles.extraCardHovered]}
+          activeOpacity={1}
+          {...Platform.select({
+            web: {
+              onMouseEnter: () => setHoveredId('extra'),
+              onMouseLeave: () => setHoveredId(null),
+            },
+          })}
+        >
+          <Text style={styles.extraTitle}>Wiring - Pruning - Trunk Manipulation</Text>
+          <Text style={styles.extraDesc}>
+            Use aluminum or copper wire during dormancy. Prune to maintain silhouette. Never
+            remove more than 20 percent of foliage at a time to keep your tree healthy.
+          </Text>
+        </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1,
     backgroundColor: '#F7F4EF',
-    paddingTop: 12,
-    paddingHorizontal: 16,
   },
-  heading: {
+  scrollContent: {
+    padding: 16,
+    paddingBottom: 40,
+    alignItems: 'center',
+  },
+  screenTitle: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: '#2C4A3E',
+    textAlign: 'center',
+    marginBottom: 12,
+  },
+  introCard: {
+    width: '100%',
+    maxWidth: 480,
+    backgroundColor: '#D8E2DC',
+    borderRadius: 14,
+    padding: 16,
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: '#C2D1C9',
+    alignItems: 'center',
+  },
+  introTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
     color: '#2C5E43',
+    marginBottom: 4,
   },
-  sub: {
+  introSub: {
     fontSize: 12,
-    color: '#7A6B5D',
-    marginTop: 4,
-    marginBottom: 14,
+    color: '#5A7363',
+    textAlign: 'center',
   },
-  list: {
-    flex: 1,
-  },
-  listContent: {
-    paddingBottom: 12,
+  listSection: {
+    width: '100%',
+    maxWidth: 480,
   },
   card: {
     flexDirection: 'row',
     backgroundColor: '#FFFFFF',
-    borderRadius: 12,
+    borderRadius: 14,
     padding: 14,
-    marginBottom: 10,
+    marginBottom: 12,
     borderWidth: 1,
     borderColor: '#E3DCB9',
+    alignItems: 'flex-start',
+    width: '100%',
+    ...Platform.select({
+      web: {
+        transitionProperty: 'transform, box-shadow, background-color, border-color',
+        transitionDuration: '200ms',
+        cursor: 'pointer',
+      },
+    }),
   },
-  thumb: {
-    width: 56,
-    height: 56,
+  cardHovered: {
+    backgroundColor: '#F0F5F1',
+    borderColor: '#8FA89B',
+    ...Platform.select({
+      web: {
+        transform: [{ translateY: -3 }],
+        boxShadow: '0px 6px 14px rgba(44, 94, 67, 0.1)',
+      },
+    }),
+  },
+  cardIconBox: {
+    width: 44,
+    height: 44,
     borderRadius: 10,
     backgroundColor: '#F4EFEA',
     justifyContent: 'center',
@@ -94,46 +190,56 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#EBE5D8',
   },
-  thumbEmoji: {
-    fontSize: 28,
-  },
-  cardBody: {
+  cardContent: {
     flex: 1,
   },
-  styleName: {
+  cardTitle: {
     fontSize: 15,
     fontWeight: 'bold',
-    color: '#8C6239',
+    color: '#2C5E43',
     marginBottom: 4,
   },
-  desc: {
-    fontSize: 13,
-    color: '#566573',
-    lineHeight: 19,
+  cardDesc: {
+    fontSize: 12,
+    color: '#7A6B5D',
+    lineHeight: 18,
   },
-  tipBox: {
-    backgroundColor: '#D8E2DC',
-    borderRadius: 12,
-    padding: 14,
+  extraCard: {
+    width: '100%',
+    maxWidth: 480,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 14,
+    padding: 16,
     marginTop: 6,
-    marginBottom: 8,
     borderWidth: 1,
-    borderColor: '#C2D1C9',
+    borderColor: '#E3DCB9',
+    ...Platform.select({
+      web: {
+        transitionProperty: 'transform, box-shadow, background-color, border-color',
+        transitionDuration: '200ms',
+        cursor: 'pointer',
+      },
+    }),
   },
-  tipTitle: {
-    fontSize: 13,
+  extraCardHovered: {
+    backgroundColor: '#FAF5F0',
+    borderColor: '#C8A888',
+    ...Platform.select({
+      web: {
+        transform: [{ translateY: -3 }],
+        boxShadow: '0px 6px 14px rgba(140, 98, 57, 0.1)',
+      },
+    }),
+  },
+  extraTitle: {
+    fontSize: 15,
     fontWeight: 'bold',
     color: '#2C5E43',
     marginBottom: 6,
   },
-  tipText: {
+  extraDesc: {
     fontSize: 12,
-    color: '#5A7363',
+    color: '#7A6B5D',
     lineHeight: 18,
-  },
-  empty: {
-    textAlign: 'center',
-    color: '#8c8275',
-    marginTop: 24,
   },
 });

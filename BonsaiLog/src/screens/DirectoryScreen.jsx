@@ -10,6 +10,7 @@ import {
   Platform,
 } from 'react-native';
 import bonsaiData from '../data/bonsai.json';
+import HoverCard from '../components/HoverCard';
 
 export default function DirectoryScreen({ navigation }) {
   const [search, setSearch] = useState('');
@@ -123,11 +124,10 @@ export default function DirectoryScreen({ navigation }) {
 
         <View style={styles.grid}>
           {filteredData.map((item) => (
-            <TouchableOpacity
+            <HoverCard
               key={item.id}
               style={[styles.card, { width: cardWidth }]}
               onPress={() => navigation.navigate('ProfileDetail', { tree: item })}
-              activeOpacity={0.75}
             >
               <View style={styles.cardImage}>
                 <Text style={styles.cardEmoji}>🌳</Text>
@@ -148,7 +148,7 @@ export default function DirectoryScreen({ navigation }) {
               >
                 <Text style={styles.badgeText}>{item.difficulty}</Text>
               </View>
-            </TouchableOpacity>
+            </HoverCard>
           ))}
         </View>
 
@@ -285,11 +285,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   card: {
-    backgroundColor: '#FFFFFF',
     borderRadius: 12,
     padding: 12,
-    borderWidth: 1,
-    borderColor: '#E3DCB9',
     alignItems: 'center',
     marginBottom: 12,
   },
